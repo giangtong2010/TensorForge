@@ -145,7 +145,9 @@ namespace cpu {
             }
             return segment;
         } catch (...) {
-            _aligned_free(ptr);
+            #ifdef _WIN32
+            windows_services::Windows_Services::windows_free(ptr);
+            #endif
             throw;
         }
     }
