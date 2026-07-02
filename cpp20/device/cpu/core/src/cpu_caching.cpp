@@ -196,8 +196,10 @@ namespace cpu {
 
         if (block->next && !block->next->allocated)
             block = merge(block, block->next);
-
-        _free_block.push_back(block);
+        {
+            std::lock_guard<std::mutex> lock(_mutex);
+            _free_block.push_back(block);
+        }
         availabel_ram_bytes = get_free_ram();
         if (cached_bytes > availabel_ram_bytes) {
             std::lock_guard<std::mutex> lock(_mutex);
