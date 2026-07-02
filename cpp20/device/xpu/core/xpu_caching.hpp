@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include <cstddef>
+#include <mutex>
 
 namespace xpu {
     struct Block {
@@ -42,6 +43,7 @@ namespace xpu {
         std::vector<Block*> _free_block = {};
         std::vector<Segment*> _segment = {};
         std::vector<sycl::queue> _queues = {};
+        std::mutex _mutex;
 
         size_t indx_alloc = 0;
 

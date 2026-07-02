@@ -71,17 +71,14 @@ namespace xpu {
 
                 segment->_head = head;
 
-                _free_block.push_back(head);
-                _segment.push_back(segment);
-
-                size_t _active_bytes = 0;
-                int _active_block = 0;
-                for (size_t i = 0; i < _segment.size(); i++) {
-                    _active_bytes += _segment[i]->allocated_bytes;
-                    _active_block += _segment[i]->active_block;
+                {
+                    std::lock_guard<std::mutex> lock(_mutex);
+                    _free_block.push_back(head);
+                    _segment.push_back(segment);
                 }
-                active_bytes = _active_bytes;
-                active_block = _active_block;
+
+                active_bytes += segment->allocated_bytes;
+                active_block += segment->active_block;
                 if (active_bytes - (128 * 1024 * 1024) > available_ram) {
                     available_ram = get_available_ram();
                 }
