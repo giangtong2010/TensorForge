@@ -137,6 +137,7 @@ namespace xpu {
             (a->_ptr + a->_bytes == b->_ptr)
         ) {
             size_t new_size = a->_bytes + b->_bytes;
+            a->_bytes = new_size;
             a->next = b->next;
 
             if (b->next)
