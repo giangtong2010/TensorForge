@@ -1,0 +1,16 @@
+{
+    "terminal.integrated.profiles.windows": {
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [
+                "/k",
+                "call .vscode/setup.cmd"
+            ],
+            "icon": "terminal-cmd"
+        },
+    },
+    "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}

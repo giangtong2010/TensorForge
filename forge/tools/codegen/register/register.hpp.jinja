@@ -1,0 +1,6 @@
+#include "dispatcher/_register_kernel.hpp"
+{% for op in operators %}
+{% for backend in op.backends %}
+REGISTER_KERNEL({{ op.name }}, {{ backend}}, {{ op.name }}_{{ backend|lower }})
+{% endfor %}
+{% endfor %}

@@ -1,0 +1,17 @@
+backends: &default_backends
+  - cpu
+  - xpu
+
+operators:
+  - name: contiguous
+    backends: *default_backends
+  - name: add
+    backends: *default_backends
+  - name: sub
+    backends: *default_backends
+  - name: mul
+    backends: *default_backends
+  - name: matmul
+    backends: *default_backends
+  - name: div
+    backends: *default_backends

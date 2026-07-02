@@ -1,0 +1,16 @@
+#include <cstddef>
+
+namespace dispatcher {
+    enum class OP {
+        {% for op in operators %}
+        {{ op.name }},
+        {% endfor %}
+        count = {{ operators|length }}
+    };
+    enum class Backends {
+        {% for backend in backends %}
+        {{ backend }},
+        {% endfor %}
+        count = {{ backends|length }}
+    };
+}
