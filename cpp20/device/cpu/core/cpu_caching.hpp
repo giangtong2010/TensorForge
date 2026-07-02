@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <mutex>
+size_t get_free_ram();
 
 namespace cpu {
     struct Block {
@@ -42,7 +43,7 @@ namespace cpu {
         std::vector<Segment*> _segment = {};
         std::mutex _mutex;
         
-        size_t availabel_ram_bytes = 0;
+        size_t availabel_ram_bytes = get_free_ram();
         size_t cached_bytes = 0;
         int active_block = 0;
         const size_t kMinBlockSize = 64;

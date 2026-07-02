@@ -34,14 +34,16 @@ namespace cpu {
     // ================== POOL ======================
     Block* Pool::find_free_block(size_t bytes) {
         if (!_free_block.empty()) {
-            for (size_t i = 0; i < _free_block.size(); i++) {
-                auto block = _free_block[i];
-                if (!block->allocated && block->_bytes >= bytes) {
-                    std::lock_guard<std::mutex> lock(_mutex);
-                    _free_block.erase(_free_block.begin() + i);
-                    auto allocated_block = split(bytes, block);
-                    allocated_block->mark_allocated();
-                    return allocated_block;
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                for (size_t i = 0; i < _free_block.size(); i++) {
+                    auto block = _free_block[i];
+                    if (!block->allocated && block->_bytes >= bytes) {
+                        _free_block.erase(_free_block.begin() + i);
+                        auto allocated_block = split(bytes, block);
+                        allocated_block->mark_allocated();
+                        return allocated_block;
+                    }
                 }
             }
         }
@@ -140,6 +142,7 @@ namespace cpu {
             
             cached_bytes += segment->allocated_bytes;
             active_block += segment->active_block;
+            availabel_ram_bytes = get_free_ram();
             if (cached_bytes - (128 * 1024 * 1024) > availabel_ram_bytes) {
                 availabel_ram_bytes = get_free_ram();
             }
@@ -163,23 +166,23 @@ namespace cpu {
                 #ifdef _WIN32
                 windows_services::Windows_Services::windows_free(segment->_base_ptr);
                 #endif
-            while (head) {
-                std::lock_guard<std::mutex> lock(_mutex);
-                _free_block.erase(
-                    std::remove(_free_block.begin(), _free_block.end(), head),
-                    _free_block.end()
-                );
-                
-                Block* next = head->next;
-                delete head;
-                head = next;
-            }
             {
                 std::lock_guard<std::mutex> lock(_mutex);
-                _segment.erase(
-                    std::remove(_segment.begin(), _segment.end(), segment),
-                    _segment.end()
-                );
+                while (head) {
+                    _free_block.erase(
+                        std::remove(_free_block.begin(), _free_block.end(), head),
+                        _free_block.end()
+                    );
+                    
+                    Block* next = head->next;
+                    delete head;
+                    head = next;
+                }
+                    std::lock_guard<std::mutex> lock(_mutex);
+                    _segment.erase(
+                        std::remove(_segment.begin(), _segment.end(), segment),
+                        _segment.end()
+                    );
             }
             delete segment;
         }
@@ -197,6 +200,7 @@ namespace cpu {
         _free_block.push_back(block);
         availabel_ram_bytes = get_free_ram();
         if (cached_bytes > availabel_ram_bytes) {
+            std::lock_guard<std::mutex> lock(_mutex);
             free_mem();
         }
     }
