@@ -1,19 +1,13 @@
 #include "xpu_caching.hpp"
+#include "get_free_vram.hpp"
 #include <sycl/sycl.hpp>
 #include <utility>
 #include <stdexcept>
+#include <algorithm>
 
-#ifdef _WIN32
-#include <windows.h>
-size_t get_available_ram() {
-    MEMORYSTATUSEX status;
-    status.dwLength = sizeof(status);
-    if (!GlobalMemoryStatusEx(&status)) {
-        return 0;
-    }
-    return static_cast<size_t>(status.ullAvailPhys);
+size_t get_available_ram(const sycl::device& device) {
+    return get_free_vram(device);
 }
-#endif
 
 // ======================== BLOCK ============================
 namespace xpu {
@@ -43,15 +37,22 @@ namespace xpu {
         for (size_t i = 0; i < gpus.size(); i++) {
             sycl::queue queue(gpus[i]);
             _queues.push_back(queue);
+            _device.emplace_back(std::move(gpus[i]));
         }
     }
 
     Segment* Pool::allocate_segment(size_t nbytes) {
-        auto allocate = [=](size_t bytes) {
+        auto allocate = [this](size_t bytes) {
+            int chance = 5;
             uint8_t* _ptr = sycl::malloc_device<uint8_t>(bytes, _queues[indx_alloc]);
             if (!_ptr) {
-                free_mem();
-                _ptr = sycl::malloc_device<uint8_t>(bytes, _queues[indx_alloc]);
+                while (chance-- > 0) {
+                    free_mem(indx_alloc);
+                    _ptr = sycl::malloc_device<uint8_t>(bytes, _queues[indx_alloc]);
+                    if (_ptr) break;
+                }
+                if (!_ptr)
+                    throw std::bad_alloc();
             }
 
             try {
@@ -70,17 +71,13 @@ namespace xpu {
                 };
 
                 segment->_head = head;
+                _free_block.insert({bytes, head});
+                _segment.push_back(segment);
 
-                {
-                    std::lock_guard<std::mutex> lock(_mutex);
-                    _free_block.push_back(head);
-                    _segment.push_back(segment);
-                }
-
-                active_bytes += segment->allocated_bytes;
-                active_block += segment->active_block;
-                if (active_bytes - (128 * 1024 * 1024) > available_ram) {
-                    available_ram = get_available_ram();
+                auto& gpu = _device[indx_alloc];
+                gpu.allocated_bytes += segment->_total_bytes;
+                if (gpu.allocated_bytes - (128 * 1024 * 1024) > gpu.free_vram) {
+                    gpu.free_vram = get_available_ram(gpu._device);
                 }
                 return segment;
             } catch(...) {
@@ -106,14 +103,14 @@ namespace xpu {
     }
 
     Block* Pool::find_free_block(size_t request_size) {
-        if (!_free_block.empty()) {
-            for (size_t i = 0; i < _free_block.size(); i++) {
-                auto block = _free_block[i];
-                if (block->_bytes >= request_size) {
-                    _free_block.erase(_free_block.begin() + i);
-                    auto allocated_block = split(request_size, block);
-                    return allocated_block;
-                }
+        std::lock_guard<std::mutex> lock(_mutex);
+        auto it = _free_block.lower_bound(request_size);
+
+        if (it != _free_block.end()) {
+            auto block = it->second;
+            if (!block->allocated && block->_bytes >= request_size) {
+                _free_block.erase(it);
+                return split(request_size, block);
             }
         }
         auto segment = allocate_segment(request_size);
@@ -132,20 +129,23 @@ namespace xpu {
                 block->next,
                 block->_segment
             };
+            block->_bytes = request_size;
+
             if (block->next) {
                 block->next->prev = new_block;
             }
             block->next = new_block;
 
-            _free_block.push_back(new_block);
+            _free_block.insert({remain_bytes, new_block});
         }
         block->mark_allocated();
         return block;
     }
     Block* Pool::merge(Block* a, Block* b) {
         if (
-            !(a->is_allocated() && b->is_allocated()) &&
-            (a->_ptr + a->_bytes == b->_ptr)
+            !a->is_allocated() && !b->is_allocated() &&
+            a->_ptr + a->_bytes == b->_ptr &&
+            a->_segment == b->_segment
         ) {
             size_t new_size = a->_bytes + b->_bytes;
             a->_bytes = new_size;
@@ -153,10 +153,15 @@ namespace xpu {
 
             if (b->next)
                 b->next->prev = a;
-            _free_block.erase(
-                std::remove(_free_block.begin(), _free_block.end(), b),
-                _free_block.end()
-            );
+
+            for (auto it = _free_block.lower_bound(b->_bytes);
+                it != _free_block.upper_bound(b->_bytes);
+                it++) {
+                    if (it->second == b) {
+                        _free_block.erase(it);
+                        break;
+                    }
+                }
             delete b;
             return a;
         }
@@ -168,6 +173,7 @@ namespace xpu {
     }
     
     void Pool::delete_block(Block* block) {
+        std::lock_guard<std::mutex> lock(_mutex);
         if (!block) return;
 
         block->mark_free();
@@ -178,35 +184,51 @@ namespace xpu {
             block = merge(block->prev, block);
         }
 
-        _free_block.push_back(block);
-        available_ram = get_available_ram();
-        if (active_bytes > available_ram) {
-            free_mem();
+        _free_block.insert({block->_bytes, block});
+        auto device = block->_segment->_queue.get_device();
+        auto gpu_it = std::find_if(
+            _device.begin(),
+            _device.end(),
+            [&](const DevicePool& d) {
+                return d._device == device;
+            }
+        );
+        size_t indx = gpu_it - _device.begin();
+        _device[indx].free_vram = get_free_vram(_device[indx]._device);
+        if (_device[indx].allocated_bytes > _device[indx].free_vram) {
+            free_mem(indx);
         }
     }
-    void Pool::free_mem() {
-        for (size_t i = 0; i < _segment.size(); i++) {
-            auto segment = _segment[i];
-            if (segment->is_free()) {
-                auto queue = segment->_queue;
+    void Pool::free_mem(size_t indx_alloc) {
+        auto& device = _device[indx_alloc];
+        for (auto it = _segment.begin(); it != _segment.end();) {
+            auto segment = *it;
+            auto queue = segment->_queue;
+            if (segment->is_free() && queue.get_device() == device._device) {
                 auto head = segment->_head;
 
                 while (head) {
-                    _free_block.erase(
-                        std::remove(_free_block.begin(), _free_block.end(), head),
-                        _free_block.end()
-                    );
+                    for (auto it = _free_block.lower_bound(head->_bytes);
+                        it != _free_block.upper_bound(head->_bytes);
+                        it++) {
+                            if (it->second == head) {
+                                _free_block.erase(it);
+                                break;
+                            }
+                        }
 
                     Block* next = head->next;
                     delete head;
                     head = next;
                 }
-                _segment.erase(
-                    std::remove(_segment.begin(), _segment.end(), segment),
-                    _segment.end()
-                );
+                it = _segment.erase(it);
                 sycl::free(segment->_base_ptr, queue);
+                device.allocated_bytes -= segment->_total_bytes;
                 delete segment;
+            }
+            else {
+                ++it;
+                continue;
             }
         }
     }

@@ -4,6 +4,7 @@
         "msvcPath": "D:/Microsoft Visual Studio/VC/Tools/MSVC/14.51.36231",
         "winSdkPath": "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0",
         "syclPath": "D:/Intel/oneAPI/compiler/latest",
+        "level_zeroPath": "D:/Intel/level-zero-1.32.0",
         "oneDNNPath": "D:/Intel/oneAPI/dnnl/latest/include",
 
         "llvmIncludePath": [
@@ -23,7 +24,7 @@
             "${winSdkPath}/um",
             "${winSdkPath}/winrt"
         ],
-
+        "level_zeroIncludePath": "${level_zeroPath}/include",
         "syclIncludePath": "${syclPath}/include",
         "oneDNNInclPath": "${oneDNNPath}/include"
     },
@@ -35,6 +36,7 @@
                 "${winSdkIncludePath}",
 
                 "${syclIncludePath}",
+                "${level_zeroIncludePath}",
                 "${oneDNNInclPath}",
 
                 "${workspaceFolder}/**",

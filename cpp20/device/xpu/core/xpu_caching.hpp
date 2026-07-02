@@ -1,6 +1,7 @@
 #include <sycl/sycl.hpp>
 #include <cstdint>
 #include <vector>
+#include <map>
 #include <cstddef>
 #include <mutex>
 
@@ -39,29 +40,35 @@ namespace xpu {
         }
     };
 
+    struct DevicePool {
+        sycl::device _device;
+        size_t allocated_bytes = 0;
+        size_t free_vram = 0;
+
+        explicit DevicePool(sycl::device&& device)
+            : _device(device) {};
+    };
+
     class Pool {
-        std::vector<Block*> _free_block = {};
+        std::multimap<size_t, Block*> _free_block = {};
         std::vector<Segment*> _segment = {};
         std::vector<sycl::queue> _queues = {};
+        std::vector<DevicePool> _device = {};
         std::mutex _mutex;
 
         size_t indx_alloc = 0;
-
-        size_t available_ram = 0;
-        size_t active_bytes = 0;
-        int active_block = 0;
         const size_t kMinBlockSize = 64;
         const size_t kMinXPUAlignment = 64;
 
-    public:
+    protected:
         Segment* allocate_segment(size_t nbytes);
         Block* split(size_t request_size, Block* block);
         Block* merge(Block* a, Block* b);
+        void free_mem(size_t indx_alloc);
+
+    public:
         Block* find_free_block(size_t request_size);
         void delete_block(Block* block);
-        void free_mem();
-
         Pool();
-        ~Pool();
     };
 }

@@ -1,6 +1,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstddef>
+#include <map>
 #include <mutex>
 size_t get_free_ram();
 
@@ -39,22 +40,23 @@ namespace cpu {
     };
 
     class Pool {
-        std::vector<Block*> _free_block = {};
+        std::multimap<size_t, Block*> _free_block = {};
         std::vector<Segment*> _segment = {};
         std::mutex _mutex;
         
         size_t availabel_ram_bytes = get_free_ram();
         size_t cached_bytes = 0;
-        int active_block = 0;
         const size_t kMinBlockSize = 64;
         const size_t kCPUAligment = 64;
 
-    public:
+    protected:
         Segment* allocate_segment(size_t bytes);
         Block* split(size_t request_size, Block* block);
         Block* merge(Block* this_block, Block* other_block);
-        void delete_block(Block* block);
         void free_mem();
+
+    public:
         Block* find_free_block(size_t bytes);
+        void delete_block(Block* block);
     };
 }
