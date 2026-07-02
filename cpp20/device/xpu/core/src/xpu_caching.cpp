@@ -54,36 +54,42 @@ namespace xpu {
                 _ptr = sycl::malloc_device<uint8_t>(bytes, _queues[indx_alloc]);
             }
 
-            Segment* segment = new Segment {
-                _queues[indx_alloc],
-                _ptr,
-                bytes,
-            };
-            Block* head = new Block {
-                _ptr,
-                bytes,
-                false,
-                nullptr,
-                nullptr,
-                segment
-            };
-            segment->_head = head;
+            try {
+                Segment* segment = new Segment {
+                    _queues[indx_alloc],
+                    _ptr,
+                    bytes,
+                };
+                Block* head = new Block {
+                    _ptr,
+                    bytes,
+                    false,
+                    nullptr,
+                    nullptr,
+                    segment
+                };
 
-            _free_block.push_back(head);
-            _segment.push_back(segment);
+                segment->_head = head;
 
-            size_t _active_bytes = 0;
-            int _active_block = 0;
-            for (size_t i = 0; i < _segment.size(); i++) {
-                _active_bytes += _segment[i]->allocated_bytes;
-                _active_block += _segment[i]->active_block;
+                _free_block.push_back(head);
+                _segment.push_back(segment);
+
+                size_t _active_bytes = 0;
+                int _active_block = 0;
+                for (size_t i = 0; i < _segment.size(); i++) {
+                    _active_bytes += _segment[i]->allocated_bytes;
+                    _active_block += _segment[i]->active_block;
+                }
+                active_bytes = _active_bytes;
+                active_block = _active_block;
+                if (active_bytes - (128 * 1024 * 1024) > available_ram) {
+                    available_ram = get_available_ram();
+                }
+                return segment;
+            } catch(...) {
+                sycl::free(_ptr, _queues[indx_alloc]);
+                throw;
             }
-            active_bytes = _active_bytes;
-            active_block = _active_block;
-            if (active_bytes - (128 * 1024 * 1024) > available_ram) {
-                available_ram = get_available_ram();
-            }
-            return segment;
         };
         Segment* segment = nullptr;
         size_t aligned_size = 
