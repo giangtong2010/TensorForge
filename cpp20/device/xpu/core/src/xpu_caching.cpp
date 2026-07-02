@@ -35,6 +35,11 @@ namespace xpu {
 // =============================== POOL ==================================
     Pool::Pool() {
         auto gpus = sycl::device::get_devices(sycl::info::device_type::gpu);
+        if (gpus.empty()) {
+            throw std::runtime_error(
+                "cannot find Intel GPU on your device, try using different backend like cpu"
+            );
+        }
         for (size_t i = 0; i < gpus.size(); i++) {
             sycl::queue queue(gpus[i]);
             _queues.push_back(queue);
@@ -66,12 +71,15 @@ namespace xpu {
 
             _free_block.push_back(head);
             _segment.push_back(segment);
+
+            size_t _active_bytes = 0;
+            int _active_block = 0;
             for (size_t i = 0; i < _segment.size(); i++) {
-                if (!_segment[i]->is_free()) {
-                    active_bytes += _segment[i]->allocated_bytes;
-                    active_block += _segment[i]->active_block;
-                }
+                _active_bytes += _segment[i]->allocated_bytes;
+                _active_block += _segment[i]->active_block;
             }
+            active_bytes = _active_bytes;
+            active_block = _active_block;
             if (active_bytes - (128 * 1024 * 1024) > available_ram) {
                 available_ram = get_available_ram();
             }
@@ -141,7 +149,7 @@ namespace xpu {
             a->next = b->next;
 
             if (b->next)
-                b->next->prev = a->next;
+                b->next->prev = a;
             _free_block.erase(
                 std::remove(_free_block.begin(), _free_block.end(), b),
                 _free_block.end()
