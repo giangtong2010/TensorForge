@@ -40,6 +40,7 @@ namespace cpu {
     class Pool {
         std::vector<Block*> _free_block = {};
         std::vector<Segment*> _segment = {};
+        std::mutex _mutex;
         
         size_t availabel_ram_bytes = 0;
         size_t cached_bytes = 0;

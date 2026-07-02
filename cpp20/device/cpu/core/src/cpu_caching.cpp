@@ -1,4 +1,5 @@
 #include "cpu_caching.hpp"
+#include "_windows_alloc_delete.hpp"
 #include <new>
 #include <algorithm>
 #include <windows.h>
@@ -6,18 +7,13 @@
 #include <stdexcept>
 #include <cstdlib>
 
-#ifdef _WIN32
-#include <windows.h>
-size_t get_available_ram() {
-    MEMORYSTATUSEX status;
-    status.dwLength = sizeof(status);
-    
-    if (!GlobalMemoryStatusEx(&status)) {
-        return 0;
-    }
-    return static_cast<size_t>(status.ullAvailPhys);
+size_t get_free_ram() {
+    #ifdef _WIN32
+        return 
+            windows_services::Windows_Services::get_available_ram();
+    #endif
 }
-#endif
+
 namespace cpu {
     // =============== BLOCK ====================
     void Block::mark_allocated() {
@@ -41,6 +37,7 @@ namespace cpu {
             for (size_t i = 0; i < _free_block.size(); i++) {
                 auto block = _free_block[i];
                 if (!block->allocated && block->_bytes >= bytes) {
+                    std::lock_guard<std::mutex> lock(_mutex);
                     _free_block.erase(_free_block.begin() + i);
                     auto allocated_block = split(bytes, block);
                     allocated_block->mark_allocated();
@@ -91,11 +88,13 @@ namespace cpu {
 
             if (other_block->next)
                 other_block->next->prev = this_block;
-
-            _free_block.erase(
-                std::remove(_free_block.begin(), _free_block.end(), other_block),
-                _free_block.end()
-            );
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                _free_block.erase(
+                    std::remove(_free_block.begin(), _free_block.end(), other_block),
+                    _free_block.end()
+                );
+            }
             delete other_block;
             return this_block;
         }
@@ -109,10 +108,19 @@ namespace cpu {
     Segment* Pool::allocate_segment(size_t bytes) {
         size_t alinged_bytes = 
             ((bytes + kCPUAligment - 1) / kCPUAligment) * kCPUAligment;
-        void* ptr = _aligned_malloc(alinged_bytes, kCPUAligment);
+        #ifdef _WIN32
+        void* ptr = 
+                windows_services::Windows_Services::windows_allocate(
+                    alinged_bytes, kCPUAligment
+                );
+        #endif
         if (!ptr) {
             free_mem();
-            ptr = _aligned_malloc(alinged_bytes, kCPUAligment);
+            #ifdef _WIN32
+            ptr = windows_services::Windows_Services::windows_allocate(
+                alinged_bytes, kCPUAligment
+            );
+            #endif
         }
         try {
             Segment* segment = new Segment {
@@ -133,7 +141,7 @@ namespace cpu {
             cached_bytes += segment->allocated_bytes;
             active_block += segment->active_block;
             if (cached_bytes - (128 * 1024 * 1024) > availabel_ram_bytes) {
-                availabel_ram_bytes = get_available_ram();
+                availabel_ram_bytes = get_free_ram();
             }
             return segment;
         } catch (...) {
@@ -150,8 +158,11 @@ namespace cpu {
 
             auto head = segment->_head;
             if (free)
-                _aligned_free(segment->_base_ptr);
+                #ifdef _WIN32
+                windows_services::Windows_Services::windows_free(segment->_base_ptr);
+                #endif
             while (head) {
+                std::lock_guard<std::mutex> lock(_mutex);
                 _free_block.erase(
                     std::remove(_free_block.begin(), _free_block.end(), head),
                     _free_block.end()
@@ -161,10 +172,13 @@ namespace cpu {
                 delete head;
                 head = next;
             }
-            _segment.erase(
-                std::remove(_segment.begin(), _segment.end(), segment),
-                _segment.end()
-            );
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                _segment.erase(
+                    std::remove(_segment.begin(), _segment.end(), segment),
+                    _segment.end()
+                );
+            }
             delete segment;
         }
     }
@@ -179,7 +193,7 @@ namespace cpu {
             block = merge(block, block->next);
 
         _free_block.push_back(block);
-        availabel_ram_bytes = get_available_ram();
+        availabel_ram_bytes = get_free_ram();
         if (cached_bytes > availabel_ram_bytes) {
             free_mem();
         }
