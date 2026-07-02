@@ -114,30 +114,32 @@ namespace cpu {
             free_mem();
             ptr = _aligned_malloc(alinged_bytes, kCPUAligment);
         }
+        try {
+            Segment* segment = new Segment {
+                static_cast<uint8_t*>(ptr),
+                alinged_bytes,    
+            };
+            Block* head = new Block {
+                static_cast<uint8_t*>(ptr),
+                alinged_bytes,
+            };
+            head->_segment = segment;
+            head->allocated = false;
+            segment->_head = head;
 
-        Segment* segment = new Segment {
-            static_cast<uint8_t*>(ptr),
-            alinged_bytes,    
-        };
-        Block* head = new Block {
-            static_cast<uint8_t*>(ptr),
-            alinged_bytes,
-        };
-        head->_segment = segment;
-        head->allocated = false;
-        segment->_head = head;
-
-        _segment.push_back(segment);
-        _free_block.push_back(head);
-        for (size_t i = 0; i < _segment.size(); i++) {
-            auto segment = _segment[i];
+            _segment.push_back(segment);
+            _free_block.push_back(head);
+            
             cached_bytes += segment->allocated_bytes;
             active_block += segment->active_block;
+            if (cached_bytes - (128 * 1024 * 1024) > availabel_ram_bytes) {
+                availabel_ram_bytes = get_available_ram();
+            }
+            return segment;
+        } catch (...) {
+            _aligned_free(ptr);
+            throw;
         }
-        if (cached_bytes - (128 * 1024 * 1024) > availabel_ram_bytes) {
-            availabel_ram_bytes = get_available_ram();
-        }
-        return segment;
     }
 
     void Pool::free_mem() {

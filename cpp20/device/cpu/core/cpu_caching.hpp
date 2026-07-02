@@ -1,6 +1,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstddef>
+#include <mutex>
 
 namespace cpu {
     struct Block {
