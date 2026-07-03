@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "cpp20\\device\\CMakeFiles\\device.dir\\xpu\\core\\src\\get_free_vram.cpp.obj"
-    }
-  ],
-  "version": 1
-}

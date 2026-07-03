@@ -9,3 +9,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(aten)
 add_subdirectory(cpp20)
+add_subdirectory(test/test_alloc)

@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "cpp20\\device\\CMakeFiles\\device.dir\\cpu\\core\\src\\_windows_services.cpp.obj"
-    }
-  ],
-  "version": 1
-}

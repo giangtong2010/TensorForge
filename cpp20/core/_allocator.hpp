@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <utility>
 
@@ -51,6 +52,7 @@ namespace cpp20 {
         }
 
         uint8_t* get_data() {return _data;}
+        const uint8_t* get_data() const {return _data;};
         void* get_ctx() {return _ctx;}
         Deleter get_deleter() {return _deleter;}
     };

@@ -1,16 +1,19 @@
+#pragma once
 #include <cstddef>
 
-enum DeviceType {
-    CPU,
-    XPU
-};
-using DeviceIndx = size_t;
+namespace cpp20 {
+    enum DeviceType {
+        CPU,
+        XPU
+    };
+    using DeviceIndx = size_t;
 
-struct Device {
-    DeviceType dev_type;
-    DeviceIndx dev_indx;
+    struct Device {
+        DeviceType _dev_type;
+        DeviceIndx _dev_indx;
 
-    Device(DeviceType dev_type, DeviceIndx dev_idnx)
-        : dev_type(dev_type), dev_indx(dev_indx) {}
-    ~Device() = default;
-};
+        Device(DeviceType dev_type, DeviceIndx dev_idnx)
+            : _dev_type(dev_type), _dev_indx(dev_idnx) {}
+        ~Device() = default;
+    };
+}

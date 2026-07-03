@@ -1,3 +1,4 @@
+#pragma once
 #include <atomic>
 
 namespace cpp20 {
@@ -17,7 +18,7 @@ namespace cpp20 {
         };
 
         IntrusiveRefcounted(const IntrusiveRefcounted&) = delete;
-        IntrusiveRefcounted& operator=(IntrusiveRefcounted&&) = delete;
+        IntrusiveRefcounted& operator=(const IntrusiveRefcounted&) = delete;
         IntrusiveRefcounted(IntrusiveRefcounted&&) = delete;
         IntrusiveRefcounted& operator=(IntrusiveRefcounted&&) = delete;
 

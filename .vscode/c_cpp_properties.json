@@ -42,23 +42,18 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/aten/dispatcher",
                 "${workspaceFolder}/aten/Aten/core",
-                "${workspaceFolder}/aten/Aten/include",
+                "${workspaceFolder}/aten/aten_include",
 
                 "${workspaceFolder}/cpp20",
                 "${workspaceFolder}/cpp20/utils/core",
-                "${workspaceFolder}/cpp20/utils/include",
                 "${workspaceFolder}/cpp20/core",
-                "${workspaceFolder}/cpp20/include", 
+                "${workspaceFolder}/cpp20/cpp20_include", 
 
-                "${workspaceFolder}/cpp20/device",
-                "${workspaceFolder}/cpp20/device/cpu/include",
+                "${workspaceFolder}/cpp20/device/include",
                 "${workspaceFolder}/cpp20/device/cpu/core",
-
-                "${workspaceFolder}/cpp20/device/xpu/include",
                 "${workspaceFolder}/cpp20/device/xpu/core",
 
-                "${workspaceFolder}/cpp20/intrusive_ptr",
-                "${workspaceFolder}/cpp20/intrusive_ptr/include"
+                "${workspaceFolder}/cpp20/intrusive_ptr"
             ],
             "intelliSenseMode": "windows-clang-x64",
             "compilerPath": "${llvmCompilerPath}",

@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>
 #include <cstddef>
 #include <stdexcept>
@@ -65,6 +66,7 @@ namespace cpp20 {
     struct DtypeToCPPType<cpp20::Dtype::Byte> {
         using type = uint8_t;
     };
+    template <>
     struct DtypeToCPPType<cpp20::Dtype::Half> {
         using type = cpp20::Half;
     };

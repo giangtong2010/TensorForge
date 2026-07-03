@@ -1,6 +1,7 @@
+#pragma once
 #include "impl/storage.hpp"
-#include "util.hpp"
-#include "intrusive_ptr/include/_intrusive_ptr.hpp"
+#include "utils.hpp"
+#include "intrusive_ptr.hpp"
 #include <vector>
 #include <cstdint>
 #include <utility>
@@ -12,7 +13,7 @@ namespace at {
         std::vector<int64_t> _stride = {};
 
         cpp20::Dtype _dtype;
-        Device _device;
+        cpp20::Device _device;
         size_t _storage_offset = 0;
         size_t _numel = 0;
 
@@ -21,7 +22,7 @@ namespace at {
             Storage storage,
             std::vector<int64_t> size,
             cpp20::Dtype dtype,
-            Device device,
+            cpp20::Device device,
             size_t storage_offset
         )
             : _storage(std::move(storage)),

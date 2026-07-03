@@ -1,3 +1,4 @@
+#pragma once
 #include <sycl/sycl.hpp>
 #include <cstdint>
 #include <vector>
@@ -6,6 +7,8 @@
 #include <mutex>
 
 namespace xpu {
+    struct Segment;
+    
     struct Block {
         uint8_t* _ptr = nullptr;
         size_t _bytes = 0;

@@ -1,3 +1,4 @@
+#pragma once
 #include <sycl/sycl.hpp>
 #include <cstddef>
 #include "xpu_caching.hpp"
@@ -7,7 +8,7 @@ namespace xpu {
     class XPUAllocator : public cpp20::Allocator {
         const size_t kXPUAlignment = 64;
         Pool _pool;
-        static void free_tensor(uint8_t* data, void* ctx);
+        static void free_tensor(uint8_t* data, void* ctx) noexcept;
 
     public:
         XPUAllocator() = default;

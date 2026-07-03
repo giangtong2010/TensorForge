@@ -1,3 +1,4 @@
+#pragma once
 #include "_intrusive_refcounted.hpp"
 #include <utility>
 
@@ -56,7 +57,7 @@ namespace cpp20 {
                 _ptr->release();
         };
 
-        T* get() const noexcept {return _ptr;};
+        T* get() noexcept {return _ptr;};
         const T* get() const noexcept {return _ptr;};
         T& operator*() const noexcept {return *_ptr;};
         T* operator->() const noexcept {return _ptr;};

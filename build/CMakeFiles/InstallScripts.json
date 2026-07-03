@@ -3,14 +3,17 @@
 	[
 		"D:/TensorForge/build/cmake_install.cmake",
 		"D:/TensorForge/build/aten/cmake_install.cmake",
-		"D:/TensorForge/build/aten/dispatcher/cmake_install.cmake",
 		"D:/TensorForge/build/aten/Aten/cmake_install.cmake",
+		"D:/TensorForge/build/aten/dispatcher/cmake_install.cmake",
+		"D:/TensorForge/build/aten/aten_include/cmake_install.cmake",
 		"D:/TensorForge/build/cpp20/cmake_install.cmake",
-		"D:/TensorForge/build/cpp20/core/cmake_install.cmake",
-		"D:/TensorForge/build/cpp20/include/cmake_install.cmake",
-		"D:/TensorForge/build/cpp20/intrusive_ptr/cmake_install.cmake",
+		"D:/TensorForge/build/cpp20/device/cmake_install.cmake",
+		"D:/TensorForge/build/cpp20/device/cpu/cmake_install.cmake",
+		"D:/TensorForge/build/cpp20/device/xpu/cmake_install.cmake",
+		"D:/TensorForge/build/cpp20/device/include/cmake_install.cmake",
 		"D:/TensorForge/build/cpp20/utils/cmake_install.cmake",
-		"D:/TensorForge/build/cpp20/device/cmake_install.cmake"
+		"D:/TensorForge/build/cpp20/cpp20_include/cmake_install.cmake",
+		"D:/TensorForge/build/test/test_alloc/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

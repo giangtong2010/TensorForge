@@ -14,7 +14,7 @@ size_t get_free_ram() {
     #endif
 }
 
-namespace cpu {
+namespace cpu {   
     // =============== BLOCK ====================
     void Block::mark_allocated() {
         if (!allocated) {

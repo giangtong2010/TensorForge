@@ -1,0 +1,7 @@
+ninja_dyndep_version = 1.0
+build cpp20/utils/CMakeFiles/utils.dir/src/compute_numel.cpp.obj: dyndep
+
+build cpp20/utils/CMakeFiles/utils.dir/src/compute_strides.cpp.obj: dyndep
+
+build cpp20/utils/CMakeFiles/utils.dir/src/is_perm.cpp.obj: dyndep
+

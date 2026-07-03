@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <cstdint>
 #include <cstddef>
@@ -6,6 +7,8 @@
 size_t get_free_ram();
 
 namespace cpu {
+    struct Segment;
+    
     struct Block {
         uint8_t* _ptr;
         size_t _bytes;

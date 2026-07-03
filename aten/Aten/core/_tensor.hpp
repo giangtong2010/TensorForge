@@ -1,5 +1,6 @@
+#pragma once
 #include "impl/tensor_impl.hpp"
-#include "_intrusive_ptr.hpp"
+#include "intrusive_ptr.hpp"
 #include <vector>
 
 namespace at {
@@ -11,7 +12,7 @@ namespace at {
         Tensor(
             std::initializer_list<T>,
             cpp20::Dtype,
-            Device,
+            cpp20::Device,
             bool
         );
         ~Tensor() = default;
@@ -26,9 +27,9 @@ namespace at {
             const size_t end, 
             const size_t step,
             const cpp20::Dtype,
-            const Device
+            const cpp20::Device
         );
-        static Tensor rand(const std::vector<int64_t>&, cpp20::Dtype, Device);
+        static Tensor rand(const std::vector<int64_t>&, cpp20::Dtype, cpp20::Device);
 
         // view ops
         Tensor view(const std::vector<int64_t>&) const;

@@ -1,4 +1,4 @@
-#include "dispatcher/_register_kernel.hpp"
+#include "dispatcher/register_kernel.hpp"
 
 
 REGISTER_KERNEL(contiguous, cpu, contiguous_cpu)

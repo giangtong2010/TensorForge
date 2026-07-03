@@ -1,3 +1,4 @@
+#pragma once
 #include "Aten/include/tensor.hpp"
 #include "_table.hpp"
 #include <cstddef>

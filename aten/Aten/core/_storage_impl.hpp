@@ -1,4 +1,5 @@
-#include "_intrusive_ptr.hpp"
+#pragma once
+#include "intrusive_ptr.hpp"
 #include "Allocator.hpp"
 #include "Dtype.hpp"
 #include "Device.hpp"
@@ -8,14 +9,14 @@ namespace at {
     class StorageImpl : public cpp20::IntrusiveRefcounted<StorageImpl> {
         cpp20::Data_ptr _data_ptr;
         size_t _nbytes;
-        Device _device;
+        cpp20::Device _device;
         const cpp20::Allocator* _allocator;
 
     public:
         StorageImpl(
             cpp20::Data_ptr data, 
             size_t nbytes, 
-            Device device, 
+            cpp20::Device device, 
             cpp20::Allocator* allocator
         )
             : _data_ptr(std::move(data)),
@@ -31,6 +32,7 @@ namespace at {
         StorageImpl& operator=(StorageImpl&&) = delete;
 
         uint8_t* get_data() {return _data_ptr.get_data();};
+        const uint8_t* get_data() const {return _data_ptr.get_data();};
         cpp20::Data_ptr& get_data_ptr() {return _data_ptr;};
     };
 }

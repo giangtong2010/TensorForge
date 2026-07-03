@@ -1,0 +1,37 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "MSVC",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "D:/TensorForge/build/test/test_alloc",
+	"dir-cur-src" : "D:/TensorForge/test/test_alloc",
+	"dir-top-bld" : "D:/TensorForge/build",
+	"dir-top-src" : "D:/TensorForge",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\TensorForge\\cpp20\\core",
+		"D:\\TensorForge\\cpp20\\device\\include",
+		"D:\\TensorForge\\cpp20\\intrusive_ptr",
+		"D:\\TensorForge\\cpp20\\utils\\core",
+		"D:\\TensorForge\\cpp20\\cpp20_include",
+		"D:\\TensorForge\\aten\\dispatcher",
+		"D:\\TensorForge\\aten\\Aten\\core",
+		"D:\\TensorForge\\aten\\aten_include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/TensorForge/build/test/test_alloc/CMakeFiles/test_cpu_alloc.dir",
+	"sources" : 
+	{
+		"test/test_alloc/CMakeFiles/test_cpu_alloc.dir/test_cpu_alloc.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/test/test_alloc/test_cpu_alloc.cpp"
+		}
+	}
+}

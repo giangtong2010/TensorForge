@@ -1,11 +1,9 @@
-add_library(utils INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/core/compute_numel.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/core/compute_strides.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/core/is_perm.hpp
+add_library(utils OBJECT
+    src/compute_numel.cpp
+    src/compute_strides.cpp
+    src/is_perm.cpp
 )
 
-target_include_directories(utils 
-    INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include 
-        ${CMAKE_CURRENT_SOURCE_DIR}/core
+target_include_directories(utils PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/core
 )
