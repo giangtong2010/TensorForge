@@ -43,7 +43,6 @@
                 "${workspaceFolder}/aten/dispatcher",
                 "${workspaceFolder}/aten/Aten/core",
                 "${workspaceFolder}/aten/Aten/include",
-                "${workspaceFolder}/aten/Aten/include/impl",
 
                 "${workspaceFolder}/cpp20",
                 "${workspaceFolder}/cpp20/utils/core",

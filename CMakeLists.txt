@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 4.2.3)
+cmake_minimum_required(VERSION 4.2)
 project(TensorForge
     VERSION 1.0
-    LANGUAGE CXX
+    LANGUAGES CXX
 )
 
 set(CMAKE_CXX_STANDARD 20)

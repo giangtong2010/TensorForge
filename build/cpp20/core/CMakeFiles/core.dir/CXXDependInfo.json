@@ -1,0 +1,33 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "MSVC",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "D:/TensorForge/build/cpp20/core",
+	"dir-cur-src" : "D:/TensorForge/cpp20/core",
+	"dir-top-bld" : "D:/TensorForge/build",
+	"dir-top-src" : "D:/TensorForge",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\TensorForge\\cpp20\\core",
+		"D:\\TensorForge\\cpp20\\include",
+		"D:\\TensorForge\\cpp20\\device\\cpu\\include",
+		"D:\\TensorForge\\cpp20\\device\\xpu\\include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/TensorForge/build/cpp20/core/CMakeFiles/core.dir",
+	"sources" : 
+	{
+		"cpp20/core/CMakeFiles/core.dir/src/choose_allocator.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/cpp20/core/src/choose_allocator.cpp"
+		}
+	}
+}

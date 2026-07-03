@@ -5,6 +5,6 @@ add_library(dispatcher INTERFACE
     _table.hpp
 )
 
-target_include_directories(dispatcher PUBLIC 
+target_include_directories(dispatcher INTERFACE 
     ${CMAKE_CURRENT_SOURCE_DIR}
 )

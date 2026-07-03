@@ -1,4 +1,4 @@
-#include "intrusive_ptr/include/_intrusive_ptr.hpp"
+#include "_intrusive_ptr.hpp"
 #include "Allocator.hpp"
 #include "Dtype.hpp"
 #include "Device.hpp"
