@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "cpp20\\utils\\CMakeFiles\\utils.dir\\src\\is_perm.cpp.obj"
-    }
-  ],
-  "version": 1
-}

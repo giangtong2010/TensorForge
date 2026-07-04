@@ -17,8 +17,6 @@ namespace cpu {
         CPUAllocator() = default;
         CPUAllocator(const CPUAllocator&) = delete;
         CPUAllocator& operator=(const CPUAllocator&) = delete;
-
-        ~CPUAllocator() override = default;
         
         cpp20::Data_ptr allocate(size_t nbytes) override;
 

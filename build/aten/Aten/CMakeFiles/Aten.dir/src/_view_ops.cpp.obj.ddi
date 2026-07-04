@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "aten\\Aten\\CMakeFiles\\Aten.dir\\src\\_view_ops.cpp.obj"
-    }
-  ],
-  "version": 1
-}

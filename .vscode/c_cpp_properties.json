@@ -49,9 +49,10 @@
                 "${workspaceFolder}/cpp20/core",
                 "${workspaceFolder}/cpp20/cpp20_include", 
 
-                "${workspaceFolder}/cpp20/device/include",
                 "${workspaceFolder}/cpp20/device/cpu/core",
+                "${workspaceFolder}/cpp20/device/cpu/cpu_include",
                 "${workspaceFolder}/cpp20/device/xpu/core",
+                "${workspaceFolder}/cpp20/device/xpu/xpu_include",
 
                 "${workspaceFolder}/cpp20/intrusive_ptr"
             ],

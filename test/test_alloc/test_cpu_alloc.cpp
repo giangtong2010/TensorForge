@@ -1,4 +1,4 @@
-#include "backend.hpp"
+#include "cpu.hpp"
 #include "Allocator.hpp"
 #include "Device.hpp"
 #include <cstdint>
@@ -6,8 +6,7 @@
 
 int main() {
     cpp20::Device device = cpp20::Device {cpp20::DeviceType::CPU, 0};
-    auto allocator = cpp20::get_allocator(device);
-    auto data_ptr = allocator.allocate(100000);
+    auto data_ptr = cpp20::get_allocator(device).allocate(4 * 1000 * 1000);
     uint8_t* ptr = data_ptr.get_data();
 
     std::cout <<"Địa chỉ bộ nhớ: " <<ptr;
