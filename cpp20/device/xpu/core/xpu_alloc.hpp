@@ -9,9 +9,9 @@ namespace xpu {
         const size_t kXPUAlignment = 64;
         Pool _pool;
         static void free_tensor(uint8_t* data, void* ctx) noexcept;
+        XPUAllocator() = default;
 
     public:
-        XPUAllocator() = default;
         XPUAllocator(const XPUAllocator&) = delete;
         XPUAllocator& operator=(const XPUAllocator&) = delete;
 

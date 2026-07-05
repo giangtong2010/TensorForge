@@ -1,0 +1,9 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "test\\test_alloc\\CMakeFiles\\test_xpu_alloc.dir\\test_xpu_alloc.cpp.obj"
+    }
+  ],
+  "version": 1
+}

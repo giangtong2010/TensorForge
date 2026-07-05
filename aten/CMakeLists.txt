@@ -1,7 +1,7 @@
 add_subdirectory(Aten)
 add_subdirectory(dispatcher)
 add_subdirectory(aten_include)
-add_library(aten INTERFACE)
+add_library(aten STATIC)
 
 target_sources(aten PRIVATE 
     $<TARGET_OBJECTS:Aten>

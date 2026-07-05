@@ -59,6 +59,7 @@ namespace cpu {
         void free_mem();
 
     public:
+        Pool() = default;
         Block* find_free_block(size_t bytes);
         void delete_block(Block* block);
     };

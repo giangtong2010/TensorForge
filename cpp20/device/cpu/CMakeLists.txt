@@ -1,4 +1,4 @@
-add_library(cpu OBJECT
+add_library(cpu STATIC
     src/_windows_services.cpp
     src/cpu_alloc.cpp
     src/cpu_caching.cpp

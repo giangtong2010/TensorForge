@@ -5,9 +5,10 @@ size_t get_free_vram(const sycl::device& device) {
         sycl::get_native<
             sycl::backend::ext_oneapi_level_zero
         >(device);
-    
+    auto zes_dev = reinterpret_cast<zes_device_handle_t>(ze_dev);
+
     uint32_t mem_count = 0;
-    zesDeviceEnumMemoryModules(ze_dev, &mem_count, nullptr);
+    zesDeviceEnumMemoryModules(zes_dev, &mem_count, nullptr);
 
     std::vector<zes_mem_handle_t> memories(mem_count);
     zesDeviceEnumMemoryModules(

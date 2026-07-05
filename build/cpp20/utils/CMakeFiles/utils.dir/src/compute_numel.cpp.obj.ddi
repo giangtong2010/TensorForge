@@ -1,0 +1,9 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "cpp20\\utils\\CMakeFiles\\utils.dir\\src\\compute_numel.cpp.obj"
+    }
+  ],
+  "version": 1
+}

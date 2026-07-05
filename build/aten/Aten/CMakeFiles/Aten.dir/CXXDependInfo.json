@@ -1,0 +1,51 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "MSVC",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "D:/TensorForge/build/aten/Aten",
+	"dir-cur-src" : "D:/TensorForge/aten/Aten",
+	"dir-top-bld" : "D:/TensorForge/build",
+	"dir-top-src" : "D:/TensorForge",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\TensorForge\\aten\\Aten\\core",
+		"D:\\TensorForge\\aten\\aten_include",
+		"D:\\TensorForge\\cpp20\\cpp20_include",
+		"D:\\TensorForge\\cpp20\\core",
+		"D:\\TensorForge\\cpp20\\intrusive_ptr",
+		"D:\\TensorForge\\cpp20\\utils\\core",
+		"D:\\TensorForge\\aten\\dispatcher"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/TensorForge/build/aten/Aten/CMakeFiles/Aten.dir",
+	"sources" : 
+	{
+		"aten/Aten/CMakeFiles/Aten.dir/src/_memory_layout.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/aten/Aten/src/_memory_layout.cpp"
+		},
+		"aten/Aten/CMakeFiles/Aten.dir/src/_reduction_ops.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/aten/Aten/src/_reduction_ops.cpp"
+		},
+		"aten/Aten/CMakeFiles/Aten.dir/src/_shape_ops.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/aten/Aten/src/_shape_ops.cpp"
+		},
+		"aten/Aten/CMakeFiles/Aten.dir/src/_view_ops.cpp.obj" : 
+		{
+			"language" : "CXX",
+			"source" : "D:/TensorForge/aten/Aten/src/_view_ops.cpp"
+		}
+	}
+}

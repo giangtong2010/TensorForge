@@ -1,6 +1,6 @@
 #pragma once
 #include <sycl/sycl.hpp>
-#include <ze_api.h>
+#include <sycl/ext/oneapi/backend/level_zero.hpp>
 #include <zes_api.h>
 #include <vector>
 #include <cstdint>

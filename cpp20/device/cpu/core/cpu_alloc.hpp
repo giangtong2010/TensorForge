@@ -12,9 +12,9 @@ namespace cpu {
         const size_t kCPUAligment = 64;
         Pool _pool;
         static void free_tensor(uint8_t* data, void* ctx) noexcept;
+        CPUAllocator() = default;
 
     public:
-        CPUAllocator() = default;
         CPUAllocator(const CPUAllocator&) = delete;
         CPUAllocator& operator=(const CPUAllocator&) = delete;
         
