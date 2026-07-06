@@ -18,10 +18,10 @@ namespace at {
         ~Tensor() = default;
 
         // creation ops
-        static Tensor empty(const std::vector<int64_t>&);
-        static Tensor zeros(const std::vector<int64_t>&);
-        static Tensor ones(const std::vector<int64_t>&);
-        static Tensor full(const std::vector<int64_t>&);
+        static Tensor empty(const std::vector<int64_t>&, const cpp20::Device);
+        static Tensor zeros(const std::vector<int64_t>&, const cpp20::Device);
+        static Tensor ones(const std::vector<int64_t>&, const cpp20::Device);
+        static Tensor full(const std::vector<int64_t>&, const cpp20::Device);
         static Tensor arange(
             const size_t start, 
             const size_t end, 
@@ -29,7 +29,7 @@ namespace at {
             const cpp20::Dtype,
             const cpp20::Device
         );
-        static Tensor rand(const std::vector<int64_t>&, cpp20::Dtype, cpp20::Device);
+        static Tensor rand(const std::vector<int64_t>&, const cpp20::Dtype, const cpp20::Device);
 
         // view ops
         Tensor view(const std::vector<int64_t>&) const;
@@ -72,8 +72,19 @@ namespace at {
         Tensor expand(const std::vector<int64_t>&) const;
         Tensor repeat(const std::vector<int64_t>&) const;
 
+        void override_size_and_stride(
+            std::vector<int64_t>& new_size,
+            std::vector<int64_t>& new_stride
+        ) {_impl->ovr_size_and_stride(new_size, new_stride);}
+
+        void override_impl(
+            cpp20::intrusive_ptr<TensorImpl> new_impl
+        ) {_impl = new_impl;}
+
         cpp20::intrusive_ptr<TensorImpl>& get_impl() noexcept {return _impl;};
         const cpp20::intrusive_ptr<TensorImpl>& get_impl() const noexcept {return _impl;};
+        size_t get_numel() noexcept {return _impl->_numel;};
+        const size_t get_numel() const noexcept {return _impl->_numel;};
 
         std::vector<int64_t>& get_size() noexcept {return _impl->_size;};
         const std::vector<int64_t>& get_size() const noexcept {return _impl->_size;};

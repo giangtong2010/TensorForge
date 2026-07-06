@@ -57,7 +57,8 @@ namespace at {
             }
             return *this;
         };
-        TensorImpl(const TensorImpl&) = delete;
+
+        TensorImpl(const TensorImpl& other) = delete;
         TensorImpl& operator=(const TensorImpl&) = delete;
 
         // operator
@@ -71,7 +72,16 @@ namespace at {
             swap(_numel, other._numel);
             swap(_storage_offset, other._storage_offset);
         }
-        
+
+    public:
+        void ovr_size_and_stride(
+            std::vector<int64_t>& new_size, 
+            std::vector<int64_t>& new_stride
+        ) noexcept {
+            _size = new_size;
+            _stride = new_stride;
+        }
+
         friend class Tensor;
     };
 }
