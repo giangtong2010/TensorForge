@@ -593,5 +593,5 @@ cpp20\device\xpu\CMakeFiles\xpu.dir\src\xpu_caching.cpp.obj.ddi: \
   D:\Microsoft\ Visual\ Studio\VC\Tools\MSVC\14.51.36231\include\map \
   D:\Microsoft\ Visual\ Studio\VC\Tools\MSVC\14.51.36231\include\xtree \
   D:\TensorForge\cpp20\device\xpu\core\get_free_vram.hpp \
-  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\zes_api.h \
-  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\ze_api.h
+  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\ze_api.h \
+  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\zes_api.h

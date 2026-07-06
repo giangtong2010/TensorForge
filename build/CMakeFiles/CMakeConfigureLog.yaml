@@ -6904,8 +6904,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-v42fim"
-      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-v42fim"
+      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-edv7vp"
+      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-edv7vp"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64/bin/clang-scan-deps.exe"
       CMAKE_CXX_FLAGS: ""
@@ -6917,16 +6917,16 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-v42fim'
+        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-edv7vp'
         
-        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_eb23a
-        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -MD -MT CMakeFiles/cmTC_eb23a.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_eb23a.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_eb23a.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Cmake/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -v -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_eb23a.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_eb23a.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_eb23a.lib -Xlinker /pdb:cmTC_eb23a.pdb -Xlinker /version:0.0     && cd ."
+        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_8e9c1
+        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -MD -MT CMakeFiles/cmTC_8e9c1.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_8e9c1.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_8e9c1.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Cmake/share/cmake-4.3/Modules/CMakeCXXCompilerABI.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -v -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_8e9c1.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_8e9c1.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_8e9c1.lib -Xlinker /pdb:cmTC_8e9c1.pdb -Xlinker /version:0.0     && cd ."
         clang version 20.1.8
         Target: x86_64-pc-windows-msvc
         Thread model: posix
         InstalledDir: D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin
-         "D:\\\\Microsoft Visual Studio\\\\VC\\\\Tools\\\\Llvm\\\\x64\\\\bin\\\\lld-link" -out:cmTC_eb23a.exe "-libpath:D:\\\\Microsoft Visual Studio\\\\VC\\\\Tools\\\\Llvm\\\\x64\\\\lib\\\\clang\\\\20\\\\lib\\\\windows" -nologo -debug /subsystem:console CMakeFiles/cmTC_eb23a.dir/CMakeCXXCompilerABI.cpp.obj /MANIFEST:EMBED /implib:cmTC_eb23a.lib /pdb:cmTC_eb23a.pdb /version:0.0
+         "D:\\\\Microsoft Visual Studio\\\\VC\\\\Tools\\\\Llvm\\\\x64\\\\bin\\\\lld-link" -out:cmTC_8e9c1.exe "-libpath:D:\\\\Microsoft Visual Studio\\\\VC\\\\Tools\\\\Llvm\\\\x64\\\\lib\\\\clang\\\\20\\\\lib\\\\windows" -nologo -debug /subsystem:console CMakeFiles/cmTC_8e9c1.dir/CMakeCXXCompilerABI.cpp.obj /MANIFEST:EMBED /implib:cmTC_8e9c1.lib /pdb:cmTC_8e9c1.pdb /version:0.0
         
       exitCode: 0
   -
@@ -6990,8 +6990,8 @@ events:
     checks:
       - "Detecting CXX compile features"
     directories:
-      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-xyqrkn"
-      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-xyqrkn"
+      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-s9nkth"
+      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-s9nkth"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64/bin/clang-scan-deps.exe"
       CMAKE_CXX_FLAGS: ""
@@ -7002,11 +7002,11 @@ events:
       variable: "CMAKE_CXX_FEATURE_TEST"
       cached: true
       stdout: |
-        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-xyqrkn'
+        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-s9nkth'
         
-        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_e4b83
-        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview   -std=c++14 -MD -MT CMakeFiles/cmTC_e4b83.dir/feature_tests.cxx.obj -MF CMakeFiles\\cmTC_e4b83.dir\\feature_tests.cxx.obj.d -o CMakeFiles/cmTC_e4b83.dir/feature_tests.cxx.obj -c D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-xyqrkn/feature_tests.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_e4b83.dir/feature_tests.cxx.obj -o cmTC_e4b83.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_e4b83.lib -Xlinker /pdb:cmTC_e4b83.pdb -Xlinker /version:0.0   -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames  && cd ."
+        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_82bd5
+        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview   -std=c++14 -MD -MT CMakeFiles/cmTC_82bd5.dir/feature_tests.cxx.obj -MF CMakeFiles\\cmTC_82bd5.dir\\feature_tests.cxx.obj.d -o CMakeFiles/cmTC_82bd5.dir/feature_tests.cxx.obj -c D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-s9nkth/feature_tests.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_82bd5.dir/feature_tests.cxx.obj -o cmTC_82bd5.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_82bd5.lib -Xlinker /pdb:cmTC_82bd5.pdb -Xlinker /version:0.0   -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames  && cd ."
         
       exitCode: 0
   -
@@ -7021,8 +7021,8 @@ events:
     checks:
       - "Detecting CXX compile features"
     directories:
-      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-t2s6n2"
-      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-t2s6n2"
+      source: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-qam7xq"
+      binary: "D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-qam7xq"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64/bin/clang-scan-deps.exe"
       CMAKE_CXX_FLAGS: ""
@@ -7033,11 +7033,11 @@ events:
       variable: "CMAKE_CXX_FEATURE_TEST"
       cached: true
       stdout: |
-        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-t2s6n2'
+        Change Dir: 'D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-qam7xq'
         
-        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_bf3b6
-        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview   -std=c++14 -MD -MT CMakeFiles/cmTC_bf3b6.dir/feature_tests.cxx.obj -MF CMakeFiles\\cmTC_bf3b6.dir\\feature_tests.cxx.obj.d -o CMakeFiles/cmTC_bf3b6.dir/feature_tests.cxx.obj -c D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-t2s6n2/feature_tests.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_bf3b6.dir/feature_tests.cxx.obj -o cmTC_bf3b6.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_bf3b6.lib -Xlinker /pdb:cmTC_bf3b6.pdb -Xlinker /version:0.0   -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames  && cd ."
+        Run Build Command(s): "D:/Microsoft Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_d37a1
+        [1/2] "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -D_MBCS  -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview   -std=c++14 -MD -MT CMakeFiles/cmTC_d37a1.dir/feature_tests.cxx.obj -MF CMakeFiles\\cmTC_d37a1.dir\\feature_tests.cxx.obj.d -o CMakeFiles/cmTC_d37a1.dir/feature_tests.cxx.obj -c D:/TensorForge/build/CMakeFiles/CMakeScratch/TryCompile-qam7xq/feature_tests.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "D:\\Microsoft Visual Studio\\VC\\Tools\\Llvm\\x64\\bin\\clang++.exe" -nostartfiles -nostdlib -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -Xlinker /subsystem:console -fuse-ld=lld-link CMakeFiles/cmTC_d37a1.dir/feature_tests.cxx.obj -o cmTC_d37a1.exe -Xlinker /MANIFEST:EMBED -Xlinker /implib:cmTC_d37a1.lib -Xlinker /pdb:cmTC_d37a1.pdb -Xlinker /version:0.0   -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -loldnames  && cd ."
         
       exitCode: 0
   -

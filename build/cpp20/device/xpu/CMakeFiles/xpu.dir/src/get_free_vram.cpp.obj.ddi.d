@@ -590,5 +590,5 @@ cpp20\device\xpu\CMakeFiles\xpu.dir\src\get_free_vram.cpp.obj.ddi: \
   D:\Intel\oneAPI\compiler\latest\include\sycl\khr\group_interface.hpp \
   D:\Intel\oneAPI\compiler\latest\include\sycl\khr\static_addrspace_cast.hpp \
   D:\Intel\oneAPI\compiler\latest\include\sycl\khr\work_item_queries.hpp \
-  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\zes_api.h \
-  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\ze_api.h
+  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\ze_api.h \
+  D:\Intel\level-zero-win-sdk-1.31.0\include\level_zero\zes_api.h
