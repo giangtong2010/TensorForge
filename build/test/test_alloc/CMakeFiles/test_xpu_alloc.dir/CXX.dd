@@ -1,3 +1,0 @@
-ninja_dyndep_version = 1.0
-build test/test_alloc/CMakeFiles/test_xpu_alloc.dir/test_xpu_alloc.cpp.obj: dyndep
-

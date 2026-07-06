@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "cpp20\\device\\xpu\\CMakeFiles\\xpu.dir\\src\\xpu_caching.cpp.obj"
-    }
-  ],
-  "version": 1
-}

@@ -1,9 +1,0 @@
-ninja_dyndep_version = 1.0
-build aten/Aten/CMakeFiles/Aten.dir/src/_memory_layout.cpp.obj: dyndep
-
-build aten/Aten/CMakeFiles/Aten.dir/src/_reduction_ops.cpp.obj: dyndep
-
-build aten/Aten/CMakeFiles/Aten.dir/src/_shape_ops.cpp.obj: dyndep
-
-build aten/Aten/CMakeFiles/Aten.dir/src/_view_ops.cpp.obj: dyndep
-

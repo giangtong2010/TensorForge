@@ -1,7 +1,0 @@
-ninja_dyndep_version = 1.0
-build cpp20/device/xpu/CMakeFiles/xpu.dir/src/get_free_vram.cpp.obj: dyndep
-
-build cpp20/device/xpu/CMakeFiles/xpu.dir/src/xpu_alloc.cpp.obj: dyndep
-
-build cpp20/device/xpu/CMakeFiles/xpu.dir/src/xpu_caching.cpp.obj: dyndep
-

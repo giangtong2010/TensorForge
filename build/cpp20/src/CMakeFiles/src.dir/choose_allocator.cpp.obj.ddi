@@ -1,9 +1,0 @@
-{
-  "revision": 0,
-  "rules": [
-    {
-      "primary-output": "cpp20\\src\\CMakeFiles\\src.dir\\choose_allocator.cpp.obj"
-    }
-  ],
-  "version": 1
-}
