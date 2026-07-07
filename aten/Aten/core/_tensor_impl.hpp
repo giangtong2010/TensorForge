@@ -58,7 +58,14 @@ namespace at {
             return *this;
         };
 
-        TensorImpl(const TensorImpl& other) = delete;
+        TensorImpl(const TensorImpl& other)
+            :_storage(other._storage),
+            _size(other._size),
+            _stride(other._stride),
+            _dtype(other._dtype),
+            _device(other._device),
+            _storage_offset(other._storage_offset),
+            _numel(other._numel) {};
         TensorImpl& operator=(const TensorImpl&) = delete;
 
         // operator
@@ -82,6 +89,11 @@ namespace at {
             _stride = new_stride;
         }
 
+        friend class cpp20::IntrusiveRefcounted<TensorImpl>;
+        friend class cpp20::intrusive_ptr<TensorImpl>;
         friend class Tensor;
+        
+        template <typename T, typename... Arg>
+        friend cpp20::intrusive_ptr<T> cpp20::make_intrusive(Arg&&...) noexcept;
     };
 }

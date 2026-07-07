@@ -20,7 +20,7 @@ namespace cpp20 {
         };
     
         intrusive_ptr(const intrusive_ptr& other) noexcept
-            : _ptr(other.get()) 
+            : _ptr(other._ptr) 
         {
             if (_ptr)
                 _ptr->retain();

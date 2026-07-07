@@ -1,0 +1,70 @@
+{
+    "env": {
+        "llvmPath": "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64",
+        "msvcPath": "D:/Microsoft Visual Studio/VC/Tools/MSVC/14.51.36231",
+        "winSdkPath": "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0",
+        "syclPath": "D:/Intel/oneAPI/compiler/latest",
+        "level_zeroPath": "D:/Intel/level-zero-win-sdk-1.31.0",
+        "oneDNNPath": "D:/Intel/oneAPI/dnnl/latest/include",
+
+        "llvmIncludePath": [
+            "${llvmPath}/lib/clang/20/include"
+        ],
+        "llvmCompilerPath": "${llvmPath}/bin/clang.exe",
+
+        "msvcIncludePath": [
+            "${msvcPath}/include"
+        ],
+        "msvcCompilerPath": "${msvcPath}/bin/Hostx64/x64/cl.exe",
+
+        "winSdkIncludePath": [
+            "${winSdkPath}/cppwinrt",
+            "${winSdkPath}/shared",
+            "${winSdkPath}/ucrt",
+            "${winSdkPath}/um",
+            "${winSdkPath}/winrt"
+        ],
+        "level_zeroIncludePath": "${level_zeroPath}/include/level_zero",
+        "syclIncludePath": "${syclPath}/include",
+        "oneDNNInclPath": "${oneDNNPath}/include"
+    },
+    "configurations": [
+        {
+            "includePath": [
+                "${llvmIncludePath}",
+                "${msvcIncludePath}",
+                "${winSdkIncludePath}",
+
+                "${syclIncludePath}",
+                "${level_zeroIncludePath}",
+                "${oneDNNInclPath}",
+
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/aten/dispatcher",
+                "${workspaceFolder}/aten/Aten/core",
+                "{workspaceFolder}/aten/Aten/native/core/xpu",
+                "{workspaceFolder}/aten/Aten/native/core/cpu",
+                "${workspaceFolder}/aten/aten_include",
+                "${workspaceFolder}/aten/aten_include/dispatcher",
+                "${workspaceFolder}/aten/aten_include/impl",
+
+                "${workspaceFolder}/cpp20",
+                "${workspaceFolder}/cpp20/utils/core",
+                "${workspaceFolder}/cpp20/core",
+                "${workspaceFolder}/cpp20/cpp20_include", 
+
+                "${workspaceFolder}/cpp20/device/cpu/core",
+                "${workspaceFolder}/cpp20/device/cpu/cpu_include",
+                "${workspaceFolder}/cpp20/device/xpu/core",
+                "${workspaceFolder}/cpp20/device/xpu/xpu_include",
+
+                "${workspaceFolder}/cpp20/intrusive_ptr"
+            ],
+            "intelliSenseMode": "windows-clang-x64",
+            "compilerPath": "${llvmCompilerPath}",
+            "cppStandard": "c++20",
+            "name": "TensorForge"
+        }
+    ],
+    "version": 4
+}

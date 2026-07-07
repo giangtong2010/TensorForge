@@ -1,7 +1,8 @@
 #pragma once
-#include "Aten/include/tensor.hpp"
+#include "tensor.hpp"
 #include "_table.hpp"
 #include <cstddef>
+#include <vector>
 
 namespace dispatcher {
     using KernelFn = void(*)(const at::Tensor&, const at::Tensor&, at::Tensor&);
@@ -19,6 +20,10 @@ namespace dispatcher {
             OP op, Backends backend, KernelFn fn
         ) {
             _table[(size_t) op][(size_t) backend] = fn;
+        }
+
+        KernelFn get_kernel(OP op, Backends backend) {
+            return _table[(size_t) op][(size_t) backend];
         }
     };
 }

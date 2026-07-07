@@ -1,4 +1,5 @@
 #include "tensor.hpp"
+#include "dispatcher/dispatcher.hpp"
 
 namespace at {
     bool is_contiguous(const Tensor& tensor) noexcept {
@@ -13,5 +14,18 @@ namespace at {
             if (stride[i] != stride_i) return false;
         }
         return true;
+    }
+
+    Tensor contiguous(const Tensor& tensor) noexcept {
+        auto backend = dispatcher::Backends::cpu;
+        auto op = dispatcher::OP::contiguous;
+
+        switch (tensor.get_device()._dev_type) {
+            case cpp20::DeviceType::CPU: backend = dispatcher::Backends::cpu;
+            case cpp20::DeviceType::XPU: backend = dispatcher::Backends::xpu;
+        }
+
+        dispatcher::KernelFn contiguous_kernel =
+            dispatcher::Dispatcher::instance().get_kernel(op, backend);
     }
 }

@@ -1,6 +1,14 @@
 #include "dispatcher/register_kernel.hpp"
+#include "dispatcher/_table.hpp"
+#include "tensor.hpp"
+#include "kernel/kernel.hpp"
+
 {% for op in operators %}
 {% for backend in op.backends %}
-REGISTER_KERNEL({{ op.name }}, {{ backend}}, {{ op.name }}_{{ backend|lower }})
+REGISTER_KERNEL(
+    {{ op.name }}, 
+    {{ backend }},
+    {{ op.name }}_{{ backend|lower }}
+);
 {% endfor %}
 {% endfor %}

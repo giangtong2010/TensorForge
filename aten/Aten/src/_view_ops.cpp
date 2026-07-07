@@ -1,4 +1,4 @@
-#include "_tensor_ops.hpp"
+#include "tensor.hpp"
 #include "utils.hpp"
 #include <vector>
 #include <stdexcept>
@@ -6,14 +6,14 @@
 #include <cstdint>
 
 namespace at {
-    Tensor view(const std::vector<int64_t>& index, Tensor& tensor) {
+    Tensor view(const Tensor& tensor, const std::vector<int64_t>& index) {
         std::optional<size_t> indx_mines = std::nullopt;
         size_t know_numel = 1;
         std::vector<int64_t> new_size;
         std::vector<int64_t> new_stride;
         if (!tensor.is_contiguous())
             throw std::invalid_argument(
-                "Tensor is not contiguous, so it can not be use for vew"
+                "Tensor is not contiguous, so it can not be use for view"
             );
 
         for (size_t i = 0; i < index.size(); i++) {
@@ -63,5 +63,14 @@ namespace at {
             cpp20::intrusive_ptr(new_impl)
         );
         return new_tensor;
+    }
+
+    Tensor reshape(const Tensor& tensor, const std::vector<int64_t>& index) {
+        if (tensor.is_contiguous())
+            return view(tensor, index);
+        
+        Tensor new_tensor = tensor;
+        new_tensor.contiguous();
+
     }
 }

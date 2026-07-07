@@ -81,6 +81,10 @@ namespace at {
             cpp20::intrusive_ptr<TensorImpl> new_impl
         ) {_impl = new_impl;}
 
+        cpp20::Device get_device() noexcept {return _impl->_device;};
+        const cpp20::Device get_device() const noexcept {return _impl->_device;};
+        uint8_t* data() noexcept {return _impl->_storage.data();};
+        const uint8_t* data() const noexcept {return _impl->_storage.data();};
         cpp20::intrusive_ptr<TensorImpl>& get_impl() noexcept {return _impl;};
         const cpp20::intrusive_ptr<TensorImpl>& get_impl() const noexcept {return _impl;};
         size_t get_numel() noexcept {return _impl->_numel;};

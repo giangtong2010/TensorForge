@@ -1,0 +1,9 @@
+#pragma once
+#include "tensnor.hpp"
+{% for op in operators %}
+{% for backend in backends %}
+{% if backend == "cpu" %}
+void {{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor);
+{% endif %}
+{% endfor %}
+{% endfor %}

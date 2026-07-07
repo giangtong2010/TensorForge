@@ -5,12 +5,13 @@ add_library(aten STATIC)
 
 target_sources(aten PRIVATE 
     $<TARGET_OBJECTS:Aten>
+    $<TARGET_OBJECTS:dispatcher>
 )
 target_link_libraries(aten INTERFACE
-    dispatcher
     aten_include
 )
 
 target_include_directories(aten INTERFACE
     ${CMAKE_SOURCE_DIR}/aten/include
+    ${CMAKE_SOURCE_DIR}/aten/dispatcher
 )
