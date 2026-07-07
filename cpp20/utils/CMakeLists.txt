@@ -2,6 +2,7 @@ add_library(utils OBJECT
     src/compute_numel.cpp
     src/compute_strides.cpp
     src/is_perm.cpp
+    src/compute_offset.cpp
 )
 
 target_include_directories(utils PRIVATE 

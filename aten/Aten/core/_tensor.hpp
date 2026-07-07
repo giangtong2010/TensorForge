@@ -2,6 +2,7 @@
 #include "impl/tensor_impl.hpp"
 #include "intrusive_ptr.hpp"
 #include <vector>
+#include <utility>
 
 namespace at {
     class Tensor {
@@ -15,6 +16,11 @@ namespace at {
             cpp20::Device,
             bool
         );
+        Tensor() = default;
+        Tensor(
+            cpp20::intrusive_ptr<TensorImpl> impl
+        )
+            : _impl(std::move(impl)) {};
         ~Tensor() = default;
 
         // creation ops
@@ -94,5 +100,10 @@ namespace at {
         const std::vector<int64_t>& get_size() const noexcept {return _impl->_size;};
         std::vector<int64_t>& get_stride() noexcept {return _impl->_stride;};
         const std::vector<int64_t>& get_stride() const noexcept {return _impl->_stride;};
+
+        cpp20::Dtype get_dtype() noexcept {return _impl->_dtype;};
+        const cpp20::Dtype get_dtype() const noexcept {return _impl->_dtype;};
+        size_t get_storage_offset() noexcept {return _impl->_storage_offset;};
+        const size_t get_storage_offset() const noexcept {return _impl->_storage_offset;};
     };
 }

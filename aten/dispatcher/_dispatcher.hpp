@@ -5,7 +5,7 @@
 #include <vector>
 
 namespace dispatcher {
-    using KernelFn = void(*)(const at::Tensor&, const at::Tensor&, at::Tensor&);
+    using KernelFn = at::Tensor (*)(const at::Tensor&, const at::Tensor&);
 
     class Dispatcher {
         KernelFn _table[(size_t) OP::count][(size_t) Backends::count] {};

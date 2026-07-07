@@ -1,9 +1,17 @@
 #pragma once
-#include "tensnor.hpp"
+#include "tensor.hpp"
+
 {% for op in operators %}
 {% for backend in backends %}
 {% if backend == "cpu" %}
-void {{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor);
+namespace cpu {
+    void kernel_{{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+}
+inline at::Tensor {{ op.name }}_{{ backend|lower }}(const at::Tensor& a, const at::Tensor& b) {
+    at::Tensor c;
+    cpu::kernel_{{ op.name }}_{{ backend|lower }}(a, b, c);
+    return c;
+};
 {% endif %}
 {% endfor %}
 {% endfor %}

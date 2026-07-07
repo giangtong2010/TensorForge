@@ -4,7 +4,14 @@
 {% for op in operators %}
 {% for backend in backends %}
 {% if backend == "xpu" %}
-void {{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+namespace xpu {
+    void kernel_{{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+}
+inline at::Tensor {{ op.name }}_{{ backend|lower }}(const at::Tensor& a, const at::Tensor& b) {
+    at::Tensor c;
+    xpu::kernel_{{ op.name }}_{{ backend|lower }}(a, b, c);
+    return c;
+};
 {% endif %}
 {% endfor %}
 {% endfor %}

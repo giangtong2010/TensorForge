@@ -1,5 +1,6 @@
 #include "tensor.hpp"
 #include "dispatcher/dispatcher.hpp"
+#include <optional>
 
 namespace at {
     bool is_contiguous(const Tensor& tensor) noexcept {
@@ -17,6 +18,9 @@ namespace at {
     }
 
     Tensor contiguous(const Tensor& tensor) noexcept {
+        if (tensor.is_contiguous())
+            return tensor;
+            
         auto backend = dispatcher::Backends::cpu;
         auto op = dispatcher::OP::contiguous;
 
@@ -25,7 +29,9 @@ namespace at {
             case cpp20::DeviceType::XPU: backend = dispatcher::Backends::xpu;
         }
 
-        dispatcher::KernelFn contiguous_kernel =
+        dispatcher::KernelFn contiguous =
             dispatcher::Dispatcher::instance().get_kernel(op, backend);
+
+        return contiguous(tensor, tensor);
     }
 }

@@ -5,11 +5,14 @@
 
 
 
+
 REGISTER_KERNEL(
     contiguous, 
     cpu,
     contiguous_cpu
 );
+
+
 
 REGISTER_KERNEL(
     contiguous, 
@@ -19,11 +22,15 @@ REGISTER_KERNEL(
 
 
 
+
+
 REGISTER_KERNEL(
     add, 
     cpu,
     add_cpu
 );
+
+
 
 REGISTER_KERNEL(
     add, 
@@ -33,11 +40,15 @@ REGISTER_KERNEL(
 
 
 
+
+
 REGISTER_KERNEL(
     sub, 
     cpu,
     sub_cpu
 );
+
+
 
 REGISTER_KERNEL(
     sub, 
@@ -47,11 +58,15 @@ REGISTER_KERNEL(
 
 
 
+
+
 REGISTER_KERNEL(
     mul, 
     cpu,
     mul_cpu
 );
+
+
 
 REGISTER_KERNEL(
     mul, 
@@ -61,11 +76,15 @@ REGISTER_KERNEL(
 
 
 
+
+
 REGISTER_KERNEL(
     matmul, 
     cpu,
     matmul_cpu
 );
+
+
 
 REGISTER_KERNEL(
     matmul, 
@@ -75,15 +94,20 @@ REGISTER_KERNEL(
 
 
 
+
+
 REGISTER_KERNEL(
     div, 
     cpu,
     div_cpu
 );
 
+
+
 REGISTER_KERNEL(
     div, 
     xpu,
     div_xpu
 );
+
 
