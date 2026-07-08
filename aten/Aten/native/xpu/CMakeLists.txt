@@ -18,7 +18,13 @@ target_include_directories(xpu_kernel
     PRIVATE
         ${CMAKE_SOURCE_DIR}/aten/aten_include 
         ${CMAKE_SOURCE_DIR}/aten/Aten/core
+
+        ${CMAKE_SOURCE_DIR}/cpp20/device/xpu/xpu_include
+        ${CMAKE_SOURCE_DIR}/cpp20/device/xpu/core
         ${CMAKE_SOURCE_DIR}/cpp20/core
+        ${CMAKE_SOURCE_DIR}/cpp20/intrusive_ptr
+        ${CMAKE_SOURCE_DIR}/cpp20/utils/core
+        ${CMAKE_SOURCE_DIR}/cpp20/cpp20_include
         ${SYCL_INCLUDE_DIR}
 
     PUBLIC 

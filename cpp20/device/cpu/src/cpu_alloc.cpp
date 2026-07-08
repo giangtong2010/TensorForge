@@ -23,4 +23,7 @@ namespace cpu {
             );
         }
     }
+    cpp20::Data_ptr CPUAllocator::allocate(size_t nbytes, size_t indx_dev) {
+        return allocate(nbytes);
+    }
 }

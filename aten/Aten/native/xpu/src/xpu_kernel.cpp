@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <array>
+#include <utility>
 #include <stdexcept>
 
 namespace xpu {
@@ -32,7 +33,7 @@ namespace xpu {
         sycl::queue& q = based_queues.get_queue(old_data);
         size_t qindx = based_queues.get_qindx(q);
 
-        auto allocator = cpp20::get_allocator(in.get_device());
+        auto& allocator = cpp20::get_allocator(in.get_device());
         cpp20::Data_ptr new_data_ptr = allocator.allocate(
             numel * cpp20::dtype_size(in.get_dtype()),
             qindx
@@ -70,7 +71,7 @@ namespace xpu {
 
         auto storage_impl =
             cpp20::make_intrusive<at::StorageImpl>(
-                new_data_ptr,
+                std::move(new_data_ptr),
                 numel * cpp20::dtype_size(in.get_dtype()),
                 in.get_device(),
                 &allocator

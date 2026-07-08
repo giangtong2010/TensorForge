@@ -12,6 +12,7 @@
 #include <cstddef>
 #include <vector>
 #include <tuple>
+#include <utility>
 #include <cstring>
 
 namespace cpu {
@@ -28,7 +29,7 @@ namespace cpu {
         const std::vector<int64_t> old_stride = inp.get_stride();
 
         const std::vector<int64_t> new_stride = cpp20::compute_strides(size);
-        auto allocator = cpp20::get_allocator(inp.get_device());
+        auto& allocator = cpp20::get_allocator(inp.get_device());
         cpp20::Data_ptr new_data_ptr = allocator.allocate(
             numel * cpp20::dtype_size(inp.get_dtype())
         );
@@ -63,7 +64,7 @@ namespace cpu {
 
         auto storage_impl =
             cpp20::make_intrusive<at::StorageImpl>(
-                new_data_ptr,
+                std::move(new_data_ptr),
                 numel * cpp20::dtype_size(inp.get_dtype()),
                 inp.get_device(),
                 &allocator

@@ -15,5 +15,7 @@ target_include_directories(cpu_kernel
         ${CMAKE_SOURCE_DIR}/aten/aten_include 
         ${CMAKE_SOURCE_DIR}/aten/Aten/core
         ${CMAKE_SOURCE_DIR}/cpp20/core
+        ${CMAKE_SOURCE_DIR}/cpp20/intrusive_ptr
+        ${CMAKE_SOURCE_DIR}/cpp20/utils/core
         ${CMAKE_SOURCE_DIR}/cpp20/cpp20_include
 )

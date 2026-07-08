@@ -10,7 +10,7 @@ namespace cpp20 {
         for (size_t i = 0; i < strides.size(); i++) {
             offset += spatial_index[i] * strides[i];
         }
-        offset + storage_offset;
+        offset += storage_offset;
         return offset;
     }
 }
