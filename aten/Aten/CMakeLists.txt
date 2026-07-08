@@ -1,3 +1,6 @@
+add_subdirectory(native/cpu)
+add_subdirectory(native/xpu)
+
 add_library(Aten OBJECT
     src/_memory_layout.cpp
     src/_reduction_ops.cpp
@@ -14,4 +17,7 @@ target_include_directories(Aten PRIVATE
 target_link_libraries(Aten PRIVATE 
     cpp20_include
     aten_include
+PUBLIC 
+    cpu_kernel
+    xpu_kernel
 )

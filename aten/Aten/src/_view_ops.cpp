@@ -71,6 +71,6 @@ namespace at {
         
         Tensor new_tensor = tensor;
         new_tensor.contiguous();
-
+        throw;
     }
 }

@@ -19,6 +19,9 @@ namespace cpu {
         CPUAllocator& operator=(const CPUAllocator&) = delete;
         
         cpp20::Data_ptr allocate(size_t nbytes) override;
+        cpp20::Data_ptr allocate(size_t nbytes, size_t indx_dev) override {
+            throw;
+        };
 
         static CPUAllocator& instance() {
             static CPUAllocator allocator;

@@ -16,6 +16,7 @@ namespace xpu {
         XPUAllocator& operator=(const XPUAllocator&) = delete;
 
         cpp20::Data_ptr allocate(size_t nbytes) override;
+        cpp20::Data_ptr allocate(size_t nbytes, size_t dev_indx) override;
         
         static XPUAllocator& instance() {
             static XPUAllocator allocator;

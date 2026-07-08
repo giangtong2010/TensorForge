@@ -65,11 +65,13 @@ namespace xpu {
 
     protected:
         Segment* allocate_segment(size_t nbytes);
+        Segment* allocate_segment(size_t nbytes, size_t indx_dev);
         Block* split(size_t request_size, Block* block);
         Block* merge(Block* a, Block* b);
         void free_mem(size_t indx_alloc);
 
     public:
+        Block* find_free_block(size_t request_size, size_t indx_dev);
         Block* find_free_block(size_t request_size);
         void delete_block(Block* block);
         Pool();

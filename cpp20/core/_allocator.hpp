@@ -58,7 +58,8 @@ namespace cpp20 {
     };
 
     struct Allocator {
-    virtual cpp20::Data_ptr allocate(size_t nbytes) = 0;
+        virtual cpp20::Data_ptr allocate(size_t nbytes) = 0;
+        virtual cpp20::Data_ptr allocate(size_t nbytes, size_t indx_dev) = 0;
 
     protected:
         Allocator() = default;

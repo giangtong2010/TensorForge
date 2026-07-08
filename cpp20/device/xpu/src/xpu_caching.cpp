@@ -1,5 +1,6 @@
 #include "xpu_caching.hpp"
 #include "get_free_vram.hpp"
+#include "based_queues.hpp"
 #include <sycl/sycl.hpp>
 #include <utility>
 #include <stdexcept>
@@ -38,6 +39,63 @@ namespace xpu {
             sycl::queue queue(gpus[i]);
             _queues.push_back(queue);
             _device.emplace_back(std::move(gpus[i]));
+
+            auto based_queues = based_queues::instance();
+            based_queues.add_queue_and_indx(queue, i);
+        }
+    }
+
+    Segment* Pool::allocate_segment(size_t nbytes, size_t indx_dev) {
+        if (indx_dev >= _queues.size()) {
+            throw std::invalid_argument(
+                "indx of devices is out of the number devices have"
+            );
+        }
+
+        size_t aligned_size = 
+            ((nbytes + kMinXPUAlignment - 1) / kMinXPUAlignment) * kMinXPUAlignment;
+
+        int chance = 5;
+        uint8_t* _ptr = sycl::malloc_device<uint8_t>(aligned_size, _queues[indx_dev]);
+        if (!_ptr) {
+            while (chance-- > 0) {
+                free_mem(indx_dev);
+                _ptr = sycl::malloc_device<uint8_t>(aligned_size, _queues[indx_dev]);
+                if (_ptr) break;
+            }
+            if (!_ptr)
+                throw std::bad_alloc();
+            }
+
+        try {
+            Segment* segment = new Segment {
+                _queues[indx_dev],
+                _ptr,
+                aligned_size,
+            };
+            Block* head = new Block {
+                _ptr,
+                aligned_size,
+                false,
+                nullptr,
+                nullptr,
+                segment
+            };
+
+            segment->_head = head;
+            _free_block.insert({aligned_size, head});
+            _segment.push_back(segment);
+
+            auto& gpu = _device[indx_dev];
+            gpu.allocated_bytes += segment->_total_bytes;
+            if (gpu.allocated_bytes - (128 * 1024 * 1024) > gpu.free_vram) {
+                gpu.free_vram = get_available_ram(gpu._device);
+            }
+            return segment;
+
+        } catch(...) {
+            sycl::free(_ptr, _queues[indx_dev]);
+            throw;
         }
     }
 
@@ -116,6 +174,31 @@ namespace xpu {
         auto segment = allocate_segment(request_size);
         return split(request_size, segment->_head);
     }
+    Block* Pool::find_free_block(size_t request_size, size_t indx_dev) {
+        std::lock_guard<std::mutex> lock(_mutex);
+        if (indx_dev >= _queues.size()) {
+            throw std::invalid_argument(
+                "indx of devices is out of the number devices have"
+            );
+        }
+        
+        auto it = _free_block.lower_bound(request_size);
+
+        if (it != _free_block.end()) {
+            auto block = it->second;
+            if (
+                !block->allocated && 
+                block->_bytes >= request_size &&
+                block->_segment->_queue == _queues[indx_dev]
+            ) {
+                _free_block.erase(it);
+                return split(request_size, block);
+            }
+        }
+        auto segment = allocate_segment(request_size, indx_dev);
+        return split(request_size, segment->_head);
+    }
+
     Block* Pool::split(size_t request_size, Block* block) {
         if (block->_bytes - request_size > kMinBlockSize) {
             size_t remain_bytes = block->_bytes - request_size;
