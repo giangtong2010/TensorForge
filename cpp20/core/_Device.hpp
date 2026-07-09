@@ -2,7 +2,7 @@
 #include <cstddef>
 
 namespace cpp20 {
-    enum DeviceType {
+    enum class DeviceType {
         CPU,
         XPU
     };

@@ -1,0 +1,9 @@
+#include "_map.hpp"
+
+{% for backend in backends %}
+MAP_DEVICE({{ backend }}, {{ backend }});
+{% endfor %}
+
+{% for dtype in dtypes %}
+MAP_DTYPE({{ dtype }}, {{ dtype }});
+{% endfor %}

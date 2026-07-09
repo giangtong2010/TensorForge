@@ -23,6 +23,6 @@ with open(output_path, "w") as xpu_kernels:
 
 gy.run()
 
-output_path = "D:/TensorForge/aten/dispatcher/_map.hpp"
+output_path = "D:/TensorForge/aten/dispatcher/map.cpp"
 with open(output_path, "w") as dttb:
     dttb.write(gm.code)

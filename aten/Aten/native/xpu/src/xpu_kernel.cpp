@@ -16,7 +16,7 @@
 #include <stdexcept>
 
 namespace xpu {
-    void kernel_contiguous_xpu(const at::Tensor& in, const at::Tensor&, at::Tensor& out) {
+    void kernel_contiguous_XPU_Int32(const at::Tensor& in, const at::Tensor&, at::Tensor& out) {
         if (in.get_device()._dev_type != cpp20::DeviceType::XPU) {
             throw std::runtime_error(
                 "tensor argument for contiguous_xpu_kernel is not in xpu (intel gpu)"
