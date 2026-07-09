@@ -16,7 +16,7 @@
 #include <cstring>
 
 namespace cpu {
-    void kernel_contiguous_cpu(const at::Tensor& inp, const at::Tensor&, at::Tensor& out) {
+    void kernel_contiguous_CPU_Int32(const at::Tensor& inp, const at::Tensor&, at::Tensor& out) {
         if (inp.get_device()._dev_type != cpp20::DeviceType::CPU) {
             throw std::runtime_error(
                 "tensor argument for contiguous_cpu is not in cpu"

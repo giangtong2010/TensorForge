@@ -1,0 +1,14 @@
+dtypes:
+- Int32
+- Int64
+- Float32
+- Float64
+- Half
+- Byte
+- Char
+- Short
+- Long
+- ComplexHalf
+- ComplexFloat
+- ComplexDouble
+- Bool

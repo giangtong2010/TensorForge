@@ -3,15 +3,18 @@
 
 {% for op in operators %}
 {% for backend in backends %}
-{% if backend == "xpu" %}
+{% if backend == "XPU" %}
+{% for dtype in dtypes %}
 namespace xpu {
-    void kernel_{{ op.name }}_{{ backend|lower }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+    void kernel_{{ op.name }}_{{ backend }}_{{ dtype }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
 }
-inline at::Tensor {{ op.name }}_{{ backend|lower }}(const at::Tensor& a, const at::Tensor& b) {
+inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype }}(const at::Tensor& a, const at::Tensor& b) {
     at::Tensor c;
-    xpu::kernel_{{ op.name }}_{{ backend|lower }}(a, b, c);
+    xpu::kernel_{{ op.name }}_{{ backend }}_{{ dtype }}(a, b, c);
     return c;
 };
+
+{% endfor %}
 {% endif %}
 {% endfor %}
 {% endfor %}

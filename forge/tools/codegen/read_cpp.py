@@ -29,16 +29,13 @@ for path in pathes:
             if str(node.spelling) == "DeviceType":
                 lst_backend = []
                 for child in node.get_children():
-                    lst_backend.append(str(child.spelling).lower())
+                    lst_backend.append(str(child.spelling))
 
                 backend.update({"backends": lst_backend})
 
             elif str(node.spelling) == "Dtype":
                 lst_dtype = []
                 for child in node.get_children():
-                    lst_dtype.append(str(child.spelling).lower())
+                    lst_dtype.append(str(child.spelling))
                 
                 dtype.update({"dtypes": lst_dtype})
-
-print(backend)
-print(dtype)

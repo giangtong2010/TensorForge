@@ -8,7 +8,7 @@ namespace dispatcher {
     using KernelFn = at::Tensor (*)(const at::Tensor&, const at::Tensor&);
 
     class Dispatcher {
-        KernelFn _table[(size_t) OP::count][(size_t) Backends::count] {};
+        KernelFn _table[(size_t) OP::count][(size_t) Backends::count][(size_t) Types::count];
 
     public:
         static Dispatcher& instance() {
@@ -17,13 +17,13 @@ namespace dispatcher {
         }
 
         void register_kernel(
-            OP op, Backends backend, KernelFn fn
+            OP op, Backends backend, Types type, KernelFn fn
         ) {
-            _table[(size_t) op][(size_t) backend] = fn;
+            _table[(size_t) op][(size_t) backend][(size_t) type] = fn;
         }
 
-        KernelFn get_kernel(OP op, Backends backend) {
-            return _table[(size_t) op][(size_t) backend];
+        KernelFn get_kernel(OP op, Backends backend, Types type) {
+            return _table[(size_t) op][(size_t) backend][(size_t) type];
         }
     };
 }

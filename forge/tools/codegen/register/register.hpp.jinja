@@ -5,12 +5,15 @@
 
 {% for op in operators %}
 {% for backend in op.backends %}
+{% for dtype in dtypes %}
 
 REGISTER_KERNEL(
     {{ op.name }}, 
-    {{ backend }},
-    {{ op.name }}_{{ backend|lower }}
+    {{ backend|lower }},
+    {{ dtype }},
+    {{ op.name }}_{{ backend }}_{{ dtype }}
 );
 
+{% endfor %}
 {% endfor %}
 {% endfor %}

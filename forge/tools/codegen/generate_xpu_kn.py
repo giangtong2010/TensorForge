@@ -1,12 +1,9 @@
 import yaml
+import load_yaml as loader
 from jinja2 import Environment, FileSystemLoader
 
-with open("yaml/operators.yaml") as op:
-    config = yaml.safe_load(op)
+config = loader.load_yaml("yaml/operators.yaml")
 
 env = Environment(loader=FileSystemLoader("register"))
 tempalte = env.get_template("generate_xpu_kn.hpp.jinja")
-code = tempalte.render(
-    operators=config["operators"],
-    backends=config["backends"]
-)
+code = tempalte.render(**config)
