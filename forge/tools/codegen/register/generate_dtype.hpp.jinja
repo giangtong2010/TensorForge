@@ -1,0 +1,49 @@
+#pragma once
+#include <cstdint>
+#include <cstddef>
+#include <stdexcept>
+#include <complex>
+
+namespace cpp20 {
+    struct Half {
+        uint16_t bits;
+    };
+
+    enum class Dtype {
+        {% for dtype in dtypes %}
+        {{ dtype.name }},
+        {% endfor %}
+        count={{ dtypes|length }},
+    };
+
+    inline size_t dtype_size(Dtype dtype) {
+        switch (dtype) {
+            {% for dtype in dtypes %}
+            case Dtype::{{ dtype.name }}: return sizeof({{ dtype.cpp_type }});
+            {% endfor %}
+            
+            default:
+                throw std::invalid_argument("Unsupported dtype");
+        }
+    }
+
+    template<cpp20::Dtype type>
+    struct DtypeToCPPType;
+
+    {% for dtype in dtypes %}
+    template <>
+    struct DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}> {
+        using type = {{ dtype.cpp_type }};
+    };
+    {% endfor %}
+
+    template<typename T>
+    struct CPPTypeToDtype;
+
+    {% for dtype in dtypes %}
+    template <>
+    struct CPPTypeToDtype<{{ dtype.cpp_type }}> {
+        static constexpr Dtype value = Dtype::{{ dtype.name }};
+    };
+    {% endfor %}
+}

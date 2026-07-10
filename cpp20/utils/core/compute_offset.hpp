@@ -9,4 +9,11 @@ namespace cpp20 {
         const std::vector<size_t>&, 
         const std::vector<int64_t>&
     ) noexcept;
+
+    size_t compute_offset(
+        size_t,
+        size_t, 
+        const std::vector<int64_t>&,
+        const std::vector<int64_t>&
+    ) noexcept;
 }

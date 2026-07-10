@@ -1,16 +1,20 @@
 #pragma once
 #include "tensor.hpp"
+#include "Dtype.hpp"
 
 {% for op in operators %}
 {% for backend in backends %}
 {% if backend == "XPU" %}
 {% for dtype in dtypes %}
+
 namespace xpu {
-    void kernel_{{ op.name }}_{{ backend }}_{{ dtype }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+    template <typename T>
+    void kernel_{{ op.name }}_{{ backend }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
 }
-inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype }}(const at::Tensor& a, const at::Tensor& b) {
+inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor& a, const at::Tensor& b) {
     at::Tensor c;
-    xpu::kernel_{{ op.name }}_{{ backend }}_{{ dtype }}(a, b, c);
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
+    xpu::kernel_{{ op.name }}_{{ backend }}<type>(a, b, c);
     return c;
 };
 

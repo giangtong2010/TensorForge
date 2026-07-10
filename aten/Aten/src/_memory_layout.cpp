@@ -20,18 +20,13 @@ namespace at {
     Tensor contiguous(const Tensor& tensor) noexcept {
         if (tensor.is_contiguous())
             return tensor;
-            
-        dispatcher::TypesAndBackends type_and_backend = 
-            dispatcher::Map::instance().get_type_and_backend(
-                tensor.get_dtype(), tensor.get_device()
-            );
 
-        dispatcher::KernelFn contiguous =
-            dispatcher::Dispatcher::instance().get_kernel(
-                dispatcher::OP::contiguous,
-                type_and_backend.backend,
-                type_and_backend.type
-            );
+            dispatcher::KernelFn contiguous =
+                dispatcher::Dispatcher::instance().get_kernel(
+                    dispatcher::OP::contiguous,
+                    tensor.get_device()._dev_type,
+                    tensor.get_dtype()
+                );
 
         return contiguous(tensor, tensor);
     }

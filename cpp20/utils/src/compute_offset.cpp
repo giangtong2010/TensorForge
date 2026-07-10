@@ -13,4 +13,18 @@ namespace cpp20 {
         offset += storage_offset;
         return offset;
     }
+
+    size_t compute_offset(
+        size_t storage_offset, 
+        size_t linear_indx,
+        const std::vector<int64_t>& stride,
+        const std::vector<int64_t>& size
+    ) noexcept {
+        size_t offset = storage_offset;
+        for (size_t i = 0; i < stride.size(); i++) {
+            auto indx = (linear_indx / stride[i]) % size[i];
+            offset *= indx;
+        }
+        return offset;
+    }
 }

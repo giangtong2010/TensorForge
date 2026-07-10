@@ -4,12 +4,10 @@
 namespace cpp20 {
     using DeviceIndx = size_t;
     enum class DeviceType {
-        
-        CPU,
-        
-        XPU,
-        
-        count=2,
+        {% for device in backends %}
+        {{ device }},
+        {% endfor %}
+        count={{ backends|length }},
     };
 
     struct Device {

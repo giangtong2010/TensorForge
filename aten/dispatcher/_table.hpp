@@ -18,42 +18,4 @@ namespace dispatcher {
         
         count = 6
     };
-    enum class Backends {
-        
-        CPU,
-        
-        XPU,
-        
-        count = 2
-    };
-    enum class Types {
-        
-        Int32,
-        
-        Int64,
-        
-        Float32,
-        
-        Float64,
-        
-        Half,
-        
-        Byte,
-        
-        Char,
-        
-        Short,
-        
-        Long,
-        
-        ComplexHalf,
-        
-        ComplexFloat,
-        
-        ComplexDouble,
-        
-        Bool,
-        
-        count = 13
-    };
 }

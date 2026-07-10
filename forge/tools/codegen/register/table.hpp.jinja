@@ -8,16 +8,4 @@ namespace dispatcher {
         {% endfor %}
         count = {{ operators|length }}
     };
-    enum class Backends {
-        {% for backend in backends %}
-        {{ backend }},
-        {% endfor %}
-        count = {{ backends|length }}
-    };
-    enum class Types {
-        {% for dytpe in dtypes %}
-        {{ dytpe }},
-        {% endfor %}
-        count = {{ dtypes|length }}
-    };
 }

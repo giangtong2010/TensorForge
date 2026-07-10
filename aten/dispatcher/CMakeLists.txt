@@ -1,6 +1,5 @@
 add_library(dispatcher OBJECT
     register.cpp
-    map.cpp
 )
 
 target_include_directories(dispatcher PUBLIC

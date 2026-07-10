@@ -2,8 +2,16 @@ import generate_op as go
 import generate_table as gt
 import generate_cpu_kn as gck
 import generate_xpu_kn as gxk
-import generate_yaml as gy
-import generate_map as gm
+import generate_dtype as gd
+import generate_device as gen_dev
+
+output_path = "D:/TensorForge/cpp20/core/_Dtype.hpp"
+with open(output_path, "w") as dtype:
+    dtype.write(gd.code)
+
+output_path = "D:/TensorForge/cpp20/core/_Device.hpp"
+with open(output_path, "w") as device:
+    device.write(gen_dev.code)
 
 output_path = "D:/TensorForge/aten/dispatcher/register.cpp"
 with open(output_path, "w") as register:
@@ -20,9 +28,3 @@ with open(output_path, "w") as cpu_kernels:
 output_path = "D:/TensorForge/aten/Aten/native/xpu/core/xpu_kernels.hpp"
 with open(output_path, "w") as xpu_kernels:
     xpu_kernels.write(gxk.code)
-
-gy.run()
-
-output_path = "D:/TensorForge/aten/dispatcher/map.cpp"
-with open(output_path, "w") as dttb:
-    dttb.write(gm.code)

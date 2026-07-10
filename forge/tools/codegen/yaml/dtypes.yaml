@@ -1,14 +1,25 @@
 dtypes:
-- Int32
-- Int64
-- Float32
-- Float64
-- Half
-- Byte
-- Char
-- Short
-- Long
-- ComplexHalf
-- ComplexFloat
-- ComplexDouble
-- Bool
+- name: Int32
+  cpp_type: int32_t
+- name: Float32
+  cpp_type: float
+- name: Float64
+  cpp_type: double
+- name: Half
+  cpp_type: Half
+- name: Byte
+  cpp_type: uint8_t
+- name: Char
+  cpp_type: int8_t
+- name: Short
+  cpp_type: int16_t
+- name: Long
+  cpp_type: int64_t
+- name: ComplexHalf
+  cpp_type: std::complex<Half>
+- name: ComplexFloat
+  cpp_type: std::complex<float>
+- name: ComplexDouble
+  cpp_type: std::complex<double>
+- name: Bool
+  cpp_type: bool

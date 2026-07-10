@@ -16,12 +16,15 @@
 #include <stdexcept>
 
 namespace xpu {
-    void kernel_contiguous_XPU_Int32(const at::Tensor& in, const at::Tensor&, at::Tensor& out) {
+    template <typename T>
+    void kernel_contiguous_XPU(const at::Tensor& in, const at::Tensor&, at::Tensor& out) {
         if (in.get_device()._dev_type != cpp20::DeviceType::XPU) {
             throw std::runtime_error(
                 "tensor argument for contiguous_xpu_kernel is not in xpu (intel gpu)"
             );
         }
+
+        using type = cpp20::DtypeToCPPType<cpp20::Dtype::Int32>::type;
 
         const uint8_t* old_data = in.data();
         const std::vector<int64_t> size = in.get_size();
@@ -38,12 +41,16 @@ namespace xpu {
             numel * cpp20::dtype_size(in.get_dtype()),
             qindx
         );
+        uint8_t* new_data = new_data_ptr.get_data();
 
         sycl::device device = q.get_device();
         size_t elem_size = cpp20::dtype_size(in.get_dtype());
         size_t LOCAL = 256;
         size_t GLOBAL =
             ((numel + LOCAL - 1) / LOCAL) * LOCAL;
+
+        auto* src = reinterpret_cast<const T*>(old_data);
+        auto* dst = reinterpret_cast<T*>(new_data);
 
         q.parallel_for(
             sycl::nd_range<1>(GLOBAL, LOCAL),
@@ -61,11 +68,8 @@ namespace xpu {
                     auto indx = (linear_indx / new_stride[i]) % size[i];
                     old_offset += indx * old_stride[i];
                 }
-                uint8_t* new_data = new_data_ptr.get_data();
-                for (size_t b = 0; b < elem_size; b++) {
-                    new_data[k * elem_size + b] =
-                        old_data[old_offset * elem_size + b];
-                }
+                
+                dst[k] = src[old_offset];
             }
         );
 
