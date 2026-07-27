@@ -200,4 +200,348 @@ namespace cpp20 {
         static constexpr Dtype value = Dtype::Bool;
     };
     
+
+    constexpr cpp20::Dtype PROMOTION_TABLE[12][12] = {
+        
+        {
+            
+            Dtype::Int32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Int32, 
+            
+            Dtype::Int32, 
+            
+            Dtype::Int32, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Int32
+            
+        },
+        
+        {
+            
+            Dtype::Float32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Float32
+            
+        },
+        
+        {
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Float64, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Float64
+            
+        },
+        
+        {
+            
+            Dtype::Half, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Half, 
+            
+            Dtype::Half, 
+            
+            Dtype::Half, 
+            
+            Dtype::Half, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Half
+            
+        },
+        
+        {
+            
+            Dtype::Int32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Byte, 
+            
+            Dtype::Short, 
+            
+            Dtype::Short, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Byte
+            
+        },
+        
+        {
+            
+            Dtype::Int32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Short, 
+            
+            Dtype::Char, 
+            
+            Dtype::Short, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Char
+            
+        },
+        
+        {
+            
+            Dtype::Int32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Short, 
+            
+            Dtype::Short, 
+            
+            Dtype::Short, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Short
+            
+        },
+        
+        {
+            
+            Dtype::Long, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Long, 
+            
+            Dtype::Long, 
+            
+            Dtype::Long, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Long
+            
+        },
+        
+        {
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexHalf
+            
+        },
+        
+        {
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexFloat
+            
+        },
+        
+        {
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::ComplexDouble
+            
+        },
+        
+        {
+            
+            Dtype::Int32, 
+            
+            Dtype::Float32, 
+            
+            Dtype::Float64, 
+            
+            Dtype::Half, 
+            
+            Dtype::Byte, 
+            
+            Dtype::Char, 
+            
+            Dtype::Short, 
+            
+            Dtype::Long, 
+            
+            Dtype::ComplexHalf, 
+            
+            Dtype::ComplexFloat, 
+            
+            Dtype::ComplexDouble, 
+            
+            Dtype::Bool
+            
+        },
+        
+    };
+
+    cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
+        return PROMOTION_TABLE[(size_t) a][(size_t) b];
+    }
 }

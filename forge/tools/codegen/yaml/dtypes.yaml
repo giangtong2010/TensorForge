@@ -1,25 +1,67 @@
 dtypes:
 - name: Int32
   cpp_type: int32_t
+  category: integral
+  bits: 32
+  signed: true
+
 - name: Float32
   cpp_type: float
+  category: floating
+  bits: 32
+
 - name: Float64
   cpp_type: double
+  category: floating
+  bits: 64
+
 - name: Half
   cpp_type: Half
+  category: floating
+  bits: 16
+
 - name: Byte
   cpp_type: uint8_t
+  category: integral
+  bits: 8
+  signed: false
+
 - name: Char
   cpp_type: int8_t
+  category: integral
+  bits: 8
+  signed: true
+
 - name: Short
   cpp_type: int16_t
+  category: integral
+  bits: 16
+  signed: true
+
 - name: Long
   cpp_type: int64_t
+  category: integral
+  bits: 64
+  signed: true
+
 - name: ComplexHalf
   cpp_type: std::complex<Half>
+  category: complex
+  bits: 16
+  base: Half
+
 - name: ComplexFloat
   cpp_type: std::complex<float>
+  category: complex
+  bits: 32
+  base: Float32
+
 - name: ComplexDouble
   cpp_type: std::complex<double>
+  category: complex
+  bits: 64
+  base: Float64
+
 - name: Bool
   cpp_type: bool
+  category: bool

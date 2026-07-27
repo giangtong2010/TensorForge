@@ -5,7 +5,7 @@
 #include <optional>
 #include <cstdint>
 
-namespace at {
+namespace at::impl {
     Tensor view(const Tensor& tensor, const std::vector<int64_t>& index) {
         std::optional<size_t> indx_mines = std::nullopt;
         size_t know_numel = 1;
@@ -67,7 +67,7 @@ namespace at {
 
     Tensor reshape(const Tensor& tensor, const std::vector<int64_t>& index) {
         if (tensor.is_contiguous())
-            return view(tensor, index);
+            return impl::view(tensor, index);
         
         Tensor new_tensor = tensor;
         new_tensor.contiguous();

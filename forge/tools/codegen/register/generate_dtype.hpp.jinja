@@ -46,4 +46,18 @@ namespace cpp20 {
         static constexpr Dtype value = Dtype::{{ dtype.name }};
     };
     {% endfor %}
+
+    constexpr cpp20::Dtype PROMOTION_TABLE[{{ dtypes|length }}][{{ dtypes|length }}] = {
+        {% for row in promote_tab %}
+        {
+            {% for dtype in row %}
+            Dtype::{{ dtype.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        },
+        {% endfor %}
+    };
+
+    cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
+        return PROMOTION_TABLE[(size_t) a][(size_t) b];
+    }
 }

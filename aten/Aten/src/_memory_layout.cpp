@@ -2,7 +2,7 @@
 #include "dispatcher/dispatcher.hpp"
 #include <optional>
 
-namespace at {
+namespace at::impl {
     bool is_contiguous(const Tensor& tensor) noexcept {
         const std::vector<int64_t>& size = tensor.get_size();
         const std::vector<int64_t>& stride = tensor.get_stride();

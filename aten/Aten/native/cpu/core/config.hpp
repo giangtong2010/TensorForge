@@ -9,4 +9,7 @@ void parallel_for(
     function&& func
 );
 
+template <typename scalar_t, class Func>
+void cpu_kernel(at::TensorIterator& iter, Func&& op);
+
 #include "config.tpp"

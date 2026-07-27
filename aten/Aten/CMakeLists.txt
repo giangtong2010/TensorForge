@@ -6,6 +6,7 @@ add_library(Aten OBJECT
     src/_reduction_ops.cpp
     src/_shape_ops.cpp
     src/_view_ops.cpp
+    src/_tensor_iterator.cpp
 )
 
 target_include_directories(Aten PRIVATE 

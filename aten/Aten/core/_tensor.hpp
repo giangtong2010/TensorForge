@@ -24,7 +24,7 @@ namespace at {
         ~Tensor() = default;
 
         // creation ops
-        static Tensor empty(const std::vector<int64_t>&, const cpp20::Device);
+        static Tensor empty(const std::vector<int64_t>&, const cpp20::Dtype, const cpp20::Device);
         static Tensor zeros(const std::vector<int64_t>&, const cpp20::Device);
         static Tensor ones(const std::vector<int64_t>&, const cpp20::Device);
         static Tensor full(const std::vector<int64_t>&, const cpp20::Device);

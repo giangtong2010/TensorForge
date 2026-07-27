@@ -1,6 +1,7 @@
 #pragma once
 #include "tensor.hpp"
 #include "Dtype.hpp"
+#include "_tensor_iterator.hpp"
 
 {% for op in operators %}
 {% for backend in backends %}
@@ -8,14 +9,37 @@
 {% for dtype in dtypes %}
 
 namespace xpu {
+    {% if op.name == "contiguous" or op.name == "matmul" %}
     template <typename T>
     void kernel_{{ op.name }}_{{ backend }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+    {% else %}
+    template <typename T>
+    void kernel_{{ op.name }}_{{ backend }}(at::TensorIterator iter);
+    {% endif %}
 }
 inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor& a, const at::Tensor& b) {
+    {% if op.name != "contiguous" and op.name != "matmul" %}
+    at::TensorIterator iter;
+    iter.add_input(a);
+    iter.add_input(b);
+    iter.infer();
+
+    at::Tensor c = at::Tensor::empty(iter.get_commo_shape(), iter.get_out_dtype(), a.get_device());
+    iter.add_output(c);
+
+    iter.build();
+
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
+    xpu::kernel_{{ op.name }}_{{ backend }}<type>(iter);
+    return c;
+
+    {% else %}
     at::Tensor c;
     using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
     xpu::kernel_{{ op.name }}_{{ backend }}<type>(a, b, c);
     return c;
+
+    {% endif %}
 };
 
 {% endfor %}

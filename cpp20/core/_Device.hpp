@@ -18,6 +18,7 @@ namespace cpp20 {
 
         Device(DeviceType dev_type, DeviceIndx dev_idnx)
             : _dev_type(dev_type), _dev_indx(dev_idnx) {}
+        Device() = default;
         ~Device() = default;
     };
 }
