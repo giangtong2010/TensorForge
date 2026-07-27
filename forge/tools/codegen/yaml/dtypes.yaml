@@ -15,11 +15,6 @@ dtypes:
   category: floating
   bits: 64
 
-- name: Half
-  cpp_type: Half
-  category: floating
-  bits: 16
-
 - name: Byte
   cpp_type: uint8_t
   category: integral
@@ -43,12 +38,6 @@ dtypes:
   category: integral
   bits: 64
   signed: true
-
-- name: ComplexHalf
-  cpp_type: std::complex<Half>
-  category: complex
-  bits: 16
-  base: Half
 
 - name: ComplexFloat
   cpp_type: std::complex<float>

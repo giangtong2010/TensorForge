@@ -67,7 +67,7 @@ namespace at::impl {
 
     Tensor reshape(const Tensor& tensor, const std::vector<int64_t>& index) {
         if (tensor.is_contiguous())
-            return impl::view(tensor, index);
+            return at::impl::view(tensor, index);
         
         Tensor new_tensor = tensor;
         new_tensor.contiguous();

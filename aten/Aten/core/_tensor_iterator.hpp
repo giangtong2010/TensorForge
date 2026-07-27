@@ -35,11 +35,20 @@ namespace at {
                 _stride
             );
         }
+        size_t operator()(size_t linear_indx) const {
+            return cpp20::compute_offset(
+                _storage_offset,
+                linear_indx,
+                _shape,
+                _stride
+            );
+        }
     };
 
     struct OperandInfo {
-        Tensor& _head_tensor;
-        uint8_t* _head_pointer;
+        Tensor _head_tensor;
+        const uint8_t* _const_ptr = nullptr; 
+        uint8_t* _ptr = nullptr;
         std::vector<int64_t> _head_shape;
         std::vector<int64_t> _head_stride;
         cpp20::Dtype _head_dtype;
@@ -52,7 +61,17 @@ namespace at {
         OperandInfo(Tensor& a, OperandTypes type) :
             _head_tensor(a),
             _storage_offset(a.get_storage_offset()),
-            _head_pointer(a.data()),
+            _ptr(a.data()),
+            _head_shape(a.get_size()),
+            _head_stride(a.get_stride()),
+            _head_dtype(a.get_dtype()),
+            _head_device(a.get_device()),
+            _type(type) {};
+
+        OperandInfo(const Tensor& a, OperandTypes type) :
+            _head_tensor(a),
+            _storage_offset(a.get_storage_offset()),
+            _const_ptr(a.data()),
             _head_shape(a.get_size()),
             _head_stride(a.get_stride()),
             _head_dtype(a.get_dtype()),
@@ -97,35 +116,35 @@ namespace at {
         void infer();
         void build();
 
-        size_t numel() {
+        size_t numel() const {
             return cpp20::compute_numel(_commo_shape);
         }
-        size_t input_storage_offset(size_t indx = 0) {
+        size_t input_storage_offset(size_t indx = 0) const {
             return _operands[_num_out + indx + 1]._storage_offset;
         }
-        size_t input_storage_offset(size_t indx = 0) {
+        size_t output_storage_offset(size_t indx = 0) const {
             return _operands[indx]._storage_offset;
         }
-        uint8_t* output_ptr(size_t indx = 0) {
-            return _operands[indx]._head_pointer;
+        uint8_t* output_ptr(size_t indx = 0) const {
+            return _operands[indx]._ptr;
         }
-        uint8_t* input_ptr(size_t indx = 0) {
-            return _operands[_num_out + indx + 1]._head_pointer;
+        const uint8_t* input_ptr(size_t indx = 0) const {
+            return _operands[_num_out + indx + 1]._const_ptr;
         }
 
         std::tuple<std::vector<int64_t>, std::vector<int64_t>>
-            input_size_and_stride(size_t indx = 0) {
+            input_size_and_stride(size_t indx = 0) const {
                 auto& op = _operands[_num_out + 1 + indx];
                 return std::make_tuple(op._head_shape, op._head_stride);
             }
         std::tuple<std::vector<int64_t>, std::vector<int64_t>>
-            output_size_and_stride(size_t indx = 0) {
+            output_size_and_stride(size_t indx = 0) const {
                 auto& op = _operands[indx];
                 return std::make_tuple(op._head_shape, op._head_stride);
             }
-        std::vector<int64_t> get_commo_shape() {
+        std::vector<int64_t> get_commo_shape() const {
             return _commo_shape;
         }
-        cpp20::Dtype get_out_dtype() {return out_dtype;}
+        cpp20::Dtype get_out_dtype() const {return out_dtype;}
     };
 }

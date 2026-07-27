@@ -117,6 +117,7 @@ namespace cpu {
         parallel_for(
             0,
             nums_work_item,
+            1024,
             [&](size_t begin, size_t end) {
                 for (size_t indx = begin; indx < end; indx++) {
                     size_t row = indx / cols;
@@ -155,18 +156,31 @@ namespace cpu {
     }
 
     template <typename T>
-    void kernel_add_CPU(const at::Tensor& a, const at::Tensor& b, at::Tensor& out) {
-        at::TensorIterator iter;
-        iter.add_output(out);
-        iter.add_input(a);
-        iter.add_input(b);
-        iter.build();
-
+    void kernel_add_CPU(const at::TensorIterator& iter) {
         cpu_kernel<T>(
-            iter, 
-            [&](a, b) {
-                return a + b;
-            }
-        )
+            iter,
+            [&](auto a, auto b) {return a + b;}
+        );
+    }
+    template <typename T>
+    void kernel_sub_CPU(const at::TensorIterator& iter) {
+        cpu_kernel<T>(
+            iter,
+            [&](auto a, auto b) {return a - b;}
+        );
+    }
+    template <typename T>
+    void kernel_div_CPU(const at::TensorIterator& iter) {
+        cpu_kernel<T>(
+            iter,
+            [&](auto a, auto b) {return a / b;}
+        );
+    }
+    template <typename T>
+    void kernel_mul_CPU(const at::TensorIterator& iter) {
+        cpu_kernel<T>(
+            iter,
+            [&](auto a, auto b) {return a * b;}
+        );
     }
 }

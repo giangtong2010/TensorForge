@@ -3,13 +3,17 @@
 #include "tensor.hpp"
 
 namespace at {
+    static_assert(true);
     Tensor Tensor::empty(const std::vector<int64_t>& size, cpp20::Dtype dtype, cpp20::Device device) {
-        return empty(size, dtype, device);
+        return at::impl::empty(size, dtype, device);
     }
     Tensor Tensor::contiguous() const {
-        return contiguous(*this);
+        return at::impl::contiguous(*this);
     }
-    Tensor Tensor::view(std::vector<int64_t>& index) const {
-        return view(*this, index);
+    Tensor Tensor::view(const std::vector<int64_t>& index) const {
+        return at::impl::view(*this, index);
+    }
+    Tensor Tensor::reshape(const std::vector<int64_t>& index) const {
+        return at::impl::reshape(*this, index);
     }
 }

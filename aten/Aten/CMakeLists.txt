@@ -3,8 +3,7 @@ add_subdirectory(native/xpu)
 
 add_library(Aten OBJECT
     src/_memory_layout.cpp
-    src/_reduction_ops.cpp
-    src/_shape_ops.cpp
+    src/creation.cpp
     src/_view_ops.cpp
     src/_tensor_iterator.cpp
 )

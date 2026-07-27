@@ -8,13 +8,13 @@
 {% if backend == "CPU" %}
 {% for dtype in dtypes %}
 
-namespace xpu {
+namespace cpu {
     {% if op.name == "contiguous" or op.name == "matmul" %}
     template <typename T>
     void kernel_{{ op.name }}_{{ backend }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
     {% else %}
     template <typename T>
-    void kernel_{{ op.name }}_{{ backend }}(at::TensorIterator iter);
+    void kernel_{{ op.name }}_{{ backend }}(const at::TensorIterator& iter);
     {% endif %}
 }
 inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor& a, const at::Tensor& b) {
@@ -30,13 +30,13 @@ inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor&
     iter.build();
 
     using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
-    xpu::kernel_{{ op.name }}_{{ backend }}<type>(iter);
+    cpu::kernel_{{ op.name }}_{{ backend }}<type>(iter);
     return c;
 
     {% else %}
     at::Tensor c;
     using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
-    xpu::kernel_{{ op.name }}_{{ backend }}<type>(a, b, c);
+    cpu::kernel_{{ op.name }}_{{ backend }}<type>(a, b, c);
     return c;
 
     {% endif %}

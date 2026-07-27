@@ -10,6 +10,6 @@ void parallel_for(
 );
 
 template <typename scalar_t, class Func>
-void cpu_kernel(at::TensorIterator& iter, Func&& op);
+void cpu_kernel(const at::TensorIterator& iter, Func&& op);
 
 #include "config.tpp"

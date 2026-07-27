@@ -5,10 +5,6 @@
 #include <complex>
 
 namespace cpp20 {
-    struct Half {
-        uint16_t bits;
-    };
-
     enum class Dtype {
         {% for dtype in dtypes %}
         {{ dtype.name }},

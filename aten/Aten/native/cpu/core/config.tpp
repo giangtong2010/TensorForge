@@ -19,7 +19,7 @@ void parallel_for(
 
     for (size_t t = 0; t < num_threads; t++) {
         size_t thread_begin = begin + t * num_tasks;
-        size_t thread_end = std::min(begin + num_tasks, end);
+        size_t thread_end = std::min(thread_begin + num_tasks, end);
 
         if (thread_begin >= thread_end)
             break;
@@ -34,22 +34,20 @@ void parallel_for(
 }
 
 template <typename scalar_t, class Func>
-void cpu_kernel(at::TensorIterator iter, Func&& op) {
+void cpu_kernel(const at::TensorIterator& iter, Func&& op) {
     scalar_t* out_data = reinterpret_cast<scalar_t*>(iter.output_ptr());
     const scalar_t* a_data = reinterpret_cast<const scalar_t*>(iter.input_ptr(0));
     const scalar_t* b_data = reinterpret_cast<const scalar_t*>(iter.input_ptr(1));
 
-    OffsetCalculator a_offset(
+    at::OffsetCalculator a_offset(
         iter.input_storage_offset(0),
-        linear_indx,
-        std::get<1>(iter.input_size_and_stride(0)),
         std::get<0>(iter.input_size_and_stride(0)),
+        std::get<1>(iter.input_size_and_stride(0))
     );
-    OffsetCalculator b_offset(
+    at::OffsetCalculator b_offset(
         iter.input_storage_offset(1),
-        linear_indx,
-        std::get<1>(iter.input_size_and_stride(1)),
         std::get<0>(iter.input_size_and_stride(1)),
+        std::get<1>(iter.input_size_and_stride(1))
     );
 
     parallel_for(
@@ -64,5 +62,5 @@ void cpu_kernel(at::TensorIterator iter, Func&& op) {
                 out_data[linear_indx] = op(a_data[a_indx], b_data[b_indx]);
             }
         }
-    )
+    );
 }

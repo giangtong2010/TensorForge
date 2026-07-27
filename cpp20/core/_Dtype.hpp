@@ -5,10 +5,6 @@
 #include <complex>
 
 namespace cpp20 {
-    struct Half {
-        uint16_t bits;
-    };
-
     enum class Dtype {
         
         Int32,
@@ -16,8 +12,6 @@ namespace cpp20 {
         Float32,
         
         Float64,
-        
-        Half,
         
         Byte,
         
@@ -27,15 +21,13 @@ namespace cpp20 {
         
         Long,
         
-        ComplexHalf,
-        
         ComplexFloat,
         
         ComplexDouble,
         
         Bool,
         
-        count=12,
+        count=10,
     };
 
     inline size_t dtype_size(Dtype dtype) {
@@ -47,8 +39,6 @@ namespace cpp20 {
             
             case Dtype::Float64: return sizeof(double);
             
-            case Dtype::Half: return sizeof(Half);
-            
             case Dtype::Byte: return sizeof(uint8_t);
             
             case Dtype::Char: return sizeof(int8_t);
@@ -56,8 +46,6 @@ namespace cpp20 {
             case Dtype::Short: return sizeof(int16_t);
             
             case Dtype::Long: return sizeof(int64_t);
-            
-            case Dtype::ComplexHalf: return sizeof(std::complex<Half>);
             
             case Dtype::ComplexFloat: return sizeof(std::complex<float>);
             
@@ -91,11 +79,6 @@ namespace cpp20 {
     };
     
     template <>
-    struct DtypeToCPPType<cpp20::Dtype::Half> {
-        using type = Half;
-    };
-    
-    template <>
     struct DtypeToCPPType<cpp20::Dtype::Byte> {
         using type = uint8_t;
     };
@@ -113,11 +96,6 @@ namespace cpp20 {
     template <>
     struct DtypeToCPPType<cpp20::Dtype::Long> {
         using type = int64_t;
-    };
-    
-    template <>
-    struct DtypeToCPPType<cpp20::Dtype::ComplexHalf> {
-        using type = std::complex<Half>;
     };
     
     template <>
@@ -156,11 +134,6 @@ namespace cpp20 {
     };
     
     template <>
-    struct CPPTypeToDtype<Half> {
-        static constexpr Dtype value = Dtype::Half;
-    };
-    
-    template <>
     struct CPPTypeToDtype<uint8_t> {
         static constexpr Dtype value = Dtype::Byte;
     };
@@ -181,11 +154,6 @@ namespace cpp20 {
     };
     
     template <>
-    struct CPPTypeToDtype<std::complex<Half>> {
-        static constexpr Dtype value = Dtype::ComplexHalf;
-    };
-    
-    template <>
     struct CPPTypeToDtype<std::complex<float>> {
         static constexpr Dtype value = Dtype::ComplexFloat;
     };
@@ -201,7 +169,7 @@ namespace cpp20 {
     };
     
 
-    constexpr cpp20::Dtype PROMOTION_TABLE[12][12] = {
+    constexpr cpp20::Dtype PROMOTION_TABLE[10][10] = {
         
         {
             
@@ -211,8 +179,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Int32, 
             
             Dtype::Int32, 
@@ -220,8 +186,6 @@ namespace cpp20 {
             Dtype::Int32, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             
@@ -247,10 +211,6 @@ namespace cpp20 {
             
             Dtype::Float32, 
             
-            Dtype::Float32, 
-            
-            Dtype::ComplexFloat, 
-            
             Dtype::ComplexFloat, 
             
             Dtype::ComplexDouble, 
@@ -275,43 +235,11 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Float64, 
-            
-            Dtype::ComplexDouble, 
-            
             Dtype::ComplexDouble, 
             
             Dtype::ComplexDouble, 
             
             Dtype::Float64
-            
-        },
-        
-        {
-            
-            Dtype::Half, 
-            
-            Dtype::Float32, 
-            
-            Dtype::Float64, 
-            
-            Dtype::Half, 
-            
-            Dtype::Half, 
-            
-            Dtype::Half, 
-            
-            Dtype::Half, 
-            
-            Dtype::Half, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexFloat, 
-            
-            Dtype::ComplexDouble, 
-            
-            Dtype::Half
             
         },
         
@@ -323,8 +251,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Byte, 
             
             Dtype::Short, 
@@ -332,8 +258,6 @@ namespace cpp20 {
             Dtype::Short, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             
@@ -351,8 +275,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Short, 
             
             Dtype::Char, 
@@ -360,8 +282,6 @@ namespace cpp20 {
             Dtype::Short, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             
@@ -379,8 +299,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Short, 
             
             Dtype::Short, 
@@ -388,8 +306,6 @@ namespace cpp20 {
             Dtype::Short, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             
@@ -407,8 +323,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Long, 
             
             Dtype::Long, 
@@ -416,8 +330,6 @@ namespace cpp20 {
             Dtype::Long, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             
@@ -429,43 +341,11 @@ namespace cpp20 {
         
         {
             
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexFloat, 
-            
-            Dtype::ComplexDouble, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexHalf, 
-            
-            Dtype::ComplexFloat, 
-            
-            Dtype::ComplexDouble, 
-            
-            Dtype::ComplexHalf
-            
-        },
-        
-        {
-            
             Dtype::ComplexFloat, 
             
             Dtype::ComplexFloat, 
             
             Dtype::ComplexDouble, 
-            
-            Dtype::ComplexFloat, 
-            
-            Dtype::ComplexFloat, 
             
             Dtype::ComplexFloat, 
             
@@ -503,10 +383,6 @@ namespace cpp20 {
             
             Dtype::ComplexDouble, 
             
-            Dtype::ComplexDouble, 
-            
-            Dtype::ComplexDouble, 
-            
             Dtype::ComplexDouble
             
         },
@@ -519,8 +395,6 @@ namespace cpp20 {
             
             Dtype::Float64, 
             
-            Dtype::Half, 
-            
             Dtype::Byte, 
             
             Dtype::Char, 
@@ -528,8 +402,6 @@ namespace cpp20 {
             Dtype::Short, 
             
             Dtype::Long, 
-            
-            Dtype::ComplexHalf, 
             
             Dtype::ComplexFloat, 
             

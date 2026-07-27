@@ -14,7 +14,7 @@ namespace xpu {
     void kernel_{{ op.name }}_{{ backend }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
     {% else %}
     template <typename T>
-    void kernel_{{ op.name }}_{{ backend }}(at::TensorIterator iter);
+    void kernel_{{ op.name }}_{{ backend }}(const at::TensorIterator& iter);
     {% endif %}
 }
 inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor& a, const at::Tensor& b) {
