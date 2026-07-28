@@ -1,2 +1,4 @@
 build/
+forge/tools/codegen/__pycache__
+files.txt
 cloc-2.10.exe
