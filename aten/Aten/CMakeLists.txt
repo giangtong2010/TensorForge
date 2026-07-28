@@ -3,9 +3,10 @@ add_subdirectory(native/xpu)
 
 add_library(Aten OBJECT
     src/_memory_layout.cpp
-    src/creation.cpp
+    src/_creation.cpp
     src/_view_ops.cpp
     src/_tensor_iterator.cpp
+    src/_arithmetic_ops.cpp
 )
 
 target_include_directories(Aten PRIVATE 

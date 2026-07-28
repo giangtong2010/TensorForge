@@ -30,4 +30,9 @@ namespace at::impl {
 
         return contiguous(tensor, tensor);
     }
+
+    Tensor clone(const Tensor& tensor) noexcept {
+        Tensor out = tensor;
+        return out;
+    }
 }

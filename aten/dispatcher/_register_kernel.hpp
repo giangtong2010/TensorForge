@@ -6,11 +6,11 @@
 
 #define REGISTER_KERNEL(op, backend, type, kernel)                              \
 namespace {                                                                     \
-    static bool reg_##op##_##backend = []() {                                   \
+    static bool reg_##op##_##backend##_##type = []() {                          \
         dispatcher::Dispatcher::instance().register_kernel(                     \
             dispatcher::OP::op,                                                 \
             cpp20::DeviceType::backend,                                         \
-            cpp20::Dtpe::type                                                   \
+            cpp20::Dtype::type,                                                 \
             kernel                                                              \
         );                                                                      \
         return true;                                                            \

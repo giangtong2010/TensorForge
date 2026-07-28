@@ -37,23 +37,22 @@ namespace at {
         );
         static Tensor rand(const std::vector<int64_t>&, const cpp20::Dtype, const cpp20::Device);
 
-        // view ops
+        // view ops (FINISHED)
         Tensor view(const std::vector<int64_t>&) const;
         Tensor reshape(const std::vector<int64_t>&) const;
         Tensor transpose(int64_t, int64_t) const;
         Tensor permute(const std::vector<int64_t>&) const;
         Tensor squeeze(size_t) const;
         Tensor unsqueeze(size_t) const;
-        void squeeze_(size_t) const;
-        void unsqueeze_(size_t) const;
+        void squeeze_(size_t);
+        void unsqueeze_(size_t);
 
-        // memory layout
+        // memory layout (FINISHED)
         bool is_contiguous() const;
         Tensor contiguous() const;
         Tensor clone() const;
-        Tensor detach() const;
 
-        // arithmetic ops
+        // arithmetic ops (FINISHED)
         Tensor add(const Tensor&) const;
         Tensor sub(const Tensor&) const;
         Tensor mul(const Tensor&) const;
