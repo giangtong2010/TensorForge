@@ -9,3 +9,4 @@ operators:
   - name: mul
   - name: matmul
   - name: div
+  - name: copy

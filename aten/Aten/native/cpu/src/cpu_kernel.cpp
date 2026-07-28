@@ -93,10 +93,14 @@ namespace cpu {
             throw std::invalid_argument(
                 "tensor must be have be shape like [m, n] x [n, q]"
             );
-        if (a.get_dtype() != b.get_dtype())
+        
+        try {
+            cpp20::Dtype out_dtype = cpp20::promote_dtype(a.get_dtype(), b.get_dtype());
+        } catch (...) {
             throw std::runtime_error(
-                "tensor must be have the same dtype to be matmul"
+                "Cannot coalesce dtype with dtype of a and b"
             );
+        }
 
         std::vector<int64_t> out_size = a_size;
         out_size[a_size.size() - 1] = b_size[b_size.size() - 1];
@@ -153,6 +157,20 @@ namespace cpu {
                 0
             );
         out.get_impl() = tensor_impl;
+    }
+
+    template <typename T>
+    void kernel_copy_CPU(at::Tensor& dst, const at::Tensor& src) {
+        if (dst.get_numel() != src.get_numel())
+            throw std::runtime_error("copy: tensor sizes do not match");
+        if (!dst.is_contiguous() || !src.is_contiguous())
+            throw std::runtime_error("copy: tensors must be contiguous");
+            
+        std::memcpy(
+            dst.data(),
+            src.data(),
+            src.get_numel() * sizeof(T)
+        );
     }
 
     template <typename T>

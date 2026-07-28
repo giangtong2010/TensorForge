@@ -12,11 +12,16 @@ namespace cpu {
     {% if op.name == "contiguous" or op.name == "matmul" %}
     template <typename T>
     void kernel_{{ op.name }}_{{ backend }}(const at::Tensor&, const at::Tensor&, at::Tensor&);
+    {% elif op.name == "copy" %}
+    template <typename T>
+    void kernel_{{ op.name }}_{{ backend }}(at::Tensor&, const at::Tensor&);
     {% else %}
     template <typename T>
     void kernel_{{ op.name }}_{{ backend }}(const at::TensorIterator& iter);
     {% endif %}
 }
+
+{% if op.name != "copy" %}
 inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor& a, const at::Tensor& b) {
     {% if op.name != "contiguous" and op.name != "matmul" %}
     at::TensorIterator iter;
@@ -41,6 +46,12 @@ inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(const at::Tensor&
 
     {% endif %}
 };
+{% else %}
+inline void {{ op.name }}_{{ backend }}_{{ dtype.name }}(at::Tensor& dst, const at::Tensor& src) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
+    cpu::kernel_{{ op.name }}_{{ backend }}<type>(dst, src);
+}
+{% endif %}
 
 {% endfor %}
 {% endif %}

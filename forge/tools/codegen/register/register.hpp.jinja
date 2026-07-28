@@ -7,12 +7,20 @@
 {% for backend in backends %}
 {% for dtype in dtypes %}
 
+{% if op.name == "copy" %}
+REGISTER_COPY_KERNEL(
+    {{ backend }},
+    {{ dtype.name }},
+    {{ op.name }}_{{ backend }}_{{ dtype.name }}
+);
+{% else %}
 REGISTER_KERNEL(
     {{ op.name }}, 
     {{ backend }},
     {{ dtype.name }},
     {{ op.name }}_{{ backend }}_{{ dtype.name }}
 );
+{% endif %}
 
 {% endfor %}
 {% endfor %}

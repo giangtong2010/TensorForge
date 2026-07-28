@@ -108,10 +108,14 @@ namespace xpu {
             throw std::invalid_argument(
                 "tensor must be have be shape like [m, n] x [n, q]"
             );
-        if (a.get_dtype() != b.get_dtype())
-            throw std::invalid_argument(
-                "tensor must be have the same dtype to be matmul"
+            
+        try {
+            cpp20::Dtype out_dtype = cpp20::promote_dtype(a.get_dtype(), b.get_dtype());
+        } catch (...) {
+            throw std::runtime_error(
+                "Cannot coalesce dtype with dtype of a and b"
             );
+        }
 
         auto& based_queue = based_queues::instance();
         sycl::queue& q = based_queue.get_queue(a.data());
@@ -168,6 +172,29 @@ namespace xpu {
                 0
             );
         out.get_impl() = tensor_impl;
+    }
+
+    template <typename T>
+    void kernel_copy_XPU(at::Tensor& dst, const at::Tensor& src) {
+        if (dst.get_numel() != src.get_numel())
+            throw std::runtime_error("copy: tensor sizes do not match");
+        if (!dst.is_contiguous() || !src.is_contiguous())
+            throw std::runtime_error("copy: tensors must be contiguous");
+
+        T* dst_ptr = reinterpret_cast<T*>(dst.data());
+        const T* src_ptr = reinterpret_cast<T*>(src.data());
+
+        sycl::queue& q_dst = based_queues::instance().get_queue(dst_ptr);
+        sycl::queue& q_src = based_queues::instance().get_queue(src_ptr);
+
+        assert(q_dst.get_context() == q_src.get_context());
+        assert(q_dst.get_device() == q_src.get_device());
+
+        q_dst.memcpy(
+            dst_ptr,
+            src_ptr,
+            src.get_numel() * sizeof(T)
+        ).wait();
     }
 
     template <typename T>

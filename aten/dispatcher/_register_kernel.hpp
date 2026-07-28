@@ -16,3 +16,15 @@ namespace {                                                                     
         return true;                                                            \
     }();                                                                        \
 }                                                                               \
+
+#define REGISTER_COPY_KERNEL(backend, type, kernel)                             \
+namespace {                                                                     \
+    static bool reg_copy_##backend##_##type = []() {                            \
+        dispatcher::Dispatcher::instance().register_copy_kernel(                \
+            cpp20::DeviceType::backend,                                         \
+            cpp20::Dtype::type,                                                 \
+            kernel                                                              \
+        );                                                                      \
+        return true;                                                            \
+    }();                                                                        \
+}                                                                               \

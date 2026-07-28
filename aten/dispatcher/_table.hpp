@@ -16,6 +16,8 @@ namespace dispatcher {
         
         div,
         
-        count = 6
+        copy,
+        
+        count = 7
     };
 }

@@ -84,16 +84,25 @@ namespace at::impl {
         if (dim2 < 0)
             indx2 = ndim + dim2;
 
+        if (indx1 >= ndim || indx2 >= ndim)
+            throw std::out_of_range(
+                "transpose dimension out of range"
+            );
+
         Tensor out_tensor = tensor;
-        auto out_size = out_tensor.get_size();
+        auto& out_size = out_tensor.get_size();
+        auto& out_stride = out_tensor.get_stride();
         std::swap(out_size[indx1], out_size[indx2]);
+        std::swap(out_stride[indx1], out_stride[indx2]);
 
         return out_tensor;
     }
 
     Tensor permute(const Tensor& tensor, const std::vector<int64_t>& perm) {
         if (perm.size() != tensor.get_size().size())
-            throw;
+            throw std::invalid_argument(
+                "perm.size() must equal tensor.ndim()"
+            );
 
         if (cpp20::is_perm(perm, tensor.get_size())) {
             size_t ndim = tensor.get_size().size();
@@ -102,9 +111,10 @@ namespace at::impl {
             for (size_t i = 0; i < ndim; i++) {
                 size_t indx = std::abs(perm[i]);
                 if (perm[i] < 0)
-                    indx = ndim + indx;
+                    indx = ndim + perm[i];
 
-                out.get_size()[i] = tensor.get_size()[perm[i]];
+                out.get_size()[i] = tensor.get_size()[indx];
+                out.get_stride()[i] = tensor.get_stride()[indx];
             }
 
             return out;
@@ -118,25 +128,39 @@ namespace at::impl {
 
     Tensor squeeze(const Tensor& tensor, const size_t indx) {
         Tensor out = tensor;
-        auto out_size = out.get_size();
-        out_size.insert(out_size.end() - indx, 1);
-
+        squeeze_(out, indx);
         return out;
     }
     Tensor unsqueeze(const Tensor& tensor, const size_t indx) {
         Tensor out = tensor;
-        auto out_size = out.get_size();
-        out_size.insert(out_size.begin() + indx, 1);
-
+        unsqueeze_(out, indx);
         return out;
     }
 
     void squeeze_(Tensor& tensor, const size_t indx) {
-        auto tensor_size = tensor.get_size();
-        tensor_size.insert(tensor_size.end() - indx, 1);
+        auto& tensor_size = tensor.get_size();
+        auto& tensor_stride = tensor.get_stride();
+
+        if (indx >= tensor_size.size())
+            throw std::out_of_range(
+                "index is ou of range (squeeze_)"
+            );
+
+        if (tensor_size[indx] == 1) {
+            tensor_size.erase(tensor_size.begin() + indx);
+            tensor_stride.erase(tensor_stride.begin() + indx);
+        }
     }
     void unsqueeze_(Tensor& tensor, const size_t indx) {
-        auto tensor_size = tensor.get_size();
-        tensor_size.insert(tensor_size.begin(), 1);
+        auto& tensor_size = tensor.get_size();
+        auto& tensor_stride = tensor.get_stride();
+
+        if (indx > tensor_size.size())
+            throw std::out_of_range(
+                "index is out of range (unsqueeze_)"
+            );
+
+        tensor_size.insert(tensor_size.begin() + indx, 1);
+        tensor_stride = cpp20::compute_strides(tensor_size);
     }
 }

@@ -33,6 +33,22 @@ namespace at {
             _storage_offset(storage_offset),
             _numel(cpp20::compute_numel(size)) {};
 
+        TensorImpl(
+            Storage storage,
+            std::vector<int64_t> size,
+            std::vector<int64_t> stride,
+            cpp20::Dtype dtype,
+            cpp20::Device device,
+            size_t storage_offset
+        )
+            : _storage(std::move(storage)),
+            _size(std::move(size)),
+            _stride(stride),
+            _dtype(dtype),
+            _device(device),
+            _storage_offset(storage_offset),
+            _numel(cpp20::compute_numel(size)) {};
+
         ~TensorImpl() = default;
 
         // allow move but not for copy
