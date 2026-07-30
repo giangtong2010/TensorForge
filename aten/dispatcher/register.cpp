@@ -1565,3 +1565,455 @@ REGISTER_COPY_KERNEL(
 
 
 
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Int32,
+    cpymem_CPU_Int32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Float32,
+    cpymem_CPU_Float32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Float64,
+    cpymem_CPU_Float64
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Byte,
+    cpymem_CPU_Byte
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Char,
+    cpymem_CPU_Char
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Short,
+    cpymem_CPU_Short
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Long,
+    cpymem_CPU_Long
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    ComplexFloat,
+    cpymem_CPU_ComplexFloat
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    ComplexDouble,
+    cpymem_CPU_ComplexDouble
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    CPU,
+    Bool,
+    cpymem_CPU_Bool
+);
+
+
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Int32,
+    cpymem_XPU_Int32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Float32,
+    cpymem_XPU_Float32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Float64,
+    cpymem_XPU_Float64
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Byte,
+    cpymem_XPU_Byte
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Char,
+    cpymem_XPU_Char
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Short,
+    cpymem_XPU_Short
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Long,
+    cpymem_XPU_Long
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    ComplexFloat,
+    cpymem_XPU_ComplexFloat
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    ComplexDouble,
+    cpymem_XPU_ComplexDouble
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    cpymem,
+    XPU,
+    Bool,
+    cpymem_XPU_Bool
+);
+
+
+
+
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Int32,
+    copy_from_host_CPU_Int32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Float32,
+    copy_from_host_CPU_Float32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Float64,
+    copy_from_host_CPU_Float64
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Byte,
+    copy_from_host_CPU_Byte
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Char,
+    copy_from_host_CPU_Char
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Short,
+    copy_from_host_CPU_Short
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Long,
+    copy_from_host_CPU_Long
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    ComplexFloat,
+    copy_from_host_CPU_ComplexFloat
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    ComplexDouble,
+    copy_from_host_CPU_ComplexDouble
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    CPU,
+    Bool,
+    copy_from_host_CPU_Bool
+);
+
+
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Int32,
+    copy_from_host_XPU_Int32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Float32,
+    copy_from_host_XPU_Float32
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Float64,
+    copy_from_host_XPU_Float64
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Byte,
+    copy_from_host_XPU_Byte
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Char,
+    copy_from_host_XPU_Char
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Short,
+    copy_from_host_XPU_Short
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Long,
+    copy_from_host_XPU_Long
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    ComplexFloat,
+    copy_from_host_XPU_ComplexFloat
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    ComplexDouble,
+    copy_from_host_XPU_ComplexDouble
+);
+
+
+
+
+
+REGISTER_MEMCPY_KERNEL(
+    copy_from_host,
+    XPU,
+    Bool,
+    copy_from_host_XPU_Bool
+);
+
+
+
+

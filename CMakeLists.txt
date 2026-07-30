@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.31.8)
 project(TensorForge
     VERSION 4.0
     LANGUAGES CXX

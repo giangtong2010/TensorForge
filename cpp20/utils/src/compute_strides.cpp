@@ -1,7 +1,7 @@
 #include "compute_strides.hpp"
 
 namespace cpp20 {
-    std::vector<int64_t> compute_strides(std::vector<int64_t>& size) noexcept {
+    std::vector<int64_t> compute_strides(const std::vector<int64_t>& size) noexcept {
         std::vector<int64_t> stride(size.size(), -1);
         size_t last_dim = size.size() - 1;
         stride[last_dim] = 1;

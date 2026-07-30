@@ -13,6 +13,13 @@ REGISTER_COPY_KERNEL(
     {{ dtype.name }},
     {{ op.name }}_{{ backend }}_{{ dtype.name }}
 );
+{% elif op.name == "cpymem" or op.name == "copy_from_host" %}
+REGISTER_MEMCPY_KERNEL(
+    {{ op.name }},
+    {{ backend }},
+    {{ dtype.name }},
+    {{ op.name }}_{{ backend }}_{{ dtype.name }}
+);
 {% else %}
 REGISTER_KERNEL(
     {{ op.name }}, 

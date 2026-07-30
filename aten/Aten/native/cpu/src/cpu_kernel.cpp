@@ -160,6 +160,28 @@ namespace cpu {
     }
 
     template <typename T>
+    void kernel_cpymem_CPU(void* dst, const void* src, const cpp20::Dtype dtype, const size_t numel) {
+        std::memcpy(
+            dst,
+            src,
+            numel * sizeof(T)
+        );
+    }
+    template <typename T>
+    void kernel_copy_from_host_CPU(void* dst, const void* src, cpp20::Dtype dtype, const size_t numel) {
+        const T* src_ptr = reinterpret_cast<const T*>(src);
+        T* dst_ptr = reinterpret_cast<T*>(dst);
+
+        dtype = cpp20::promote_dtype(
+            dtype, cpp20::CPPTypeToDtype<T>::value
+        );
+
+        for (size_t i = 0; i < numel; i++) {
+            dst_ptr[i] = src_ptr[i];
+        }
+    }
+
+    template <typename T>
     void kernel_copy_CPU(at::Tensor& dst, const at::Tensor& src) {
         if (dst.get_numel() != src.get_numel())
             throw std::runtime_error("copy: tensor sizes do not match");

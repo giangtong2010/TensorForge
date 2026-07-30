@@ -13,5 +13,5 @@
         },
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
 }

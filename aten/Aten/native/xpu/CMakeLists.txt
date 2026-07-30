@@ -7,7 +7,7 @@ add_library(xpu_kernel STATIC
     src/xpu_kernel.cpp
 )
 
-target_link_directories(xpu_kernel
+target_link_libraries(xpu_kernel
     PRIVATE 
         cpp20_include
         aten_include

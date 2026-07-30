@@ -5,7 +5,7 @@ add_library(cpu_kernel STATIC
 target_link_libraries(cpu_kernel
     PRIVATE 
         cpp20_include
-        ate_include
+        aten_include
 )
 
 target_include_directories(cpu_kernel

@@ -2,18 +2,27 @@
 #include <vector>
 #include <cstddef>
 #include <cstdint>
+#include <sycl/sycl.hpp>
 
 namespace cpp20 {
-    size_t compute_offset(
+    SYCL_EXTERNAL size_t compute_offset(
         size_t, 
         const std::vector<size_t>&, 
         const std::vector<int64_t>&
     ) noexcept;
 
-    size_t compute_offset(
+    SYCL_EXTERNAL size_t compute_offset(
         size_t,
         size_t, 
         const std::vector<int64_t>&,
         const std::vector<int64_t>&
+    ) noexcept;
+
+    SYCL_EXTERNAL size_t compute_offset(
+        size_t,
+        size_t,
+        const size_t,
+        const int64_t*,
+        const int64_t*
     ) noexcept;
 }

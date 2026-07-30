@@ -18,6 +18,10 @@ namespace dispatcher {
         
         copy,
         
-        count = 7
+        cpymem,
+        
+        copy_from_host,
+        
+        count = 9
     };
 }

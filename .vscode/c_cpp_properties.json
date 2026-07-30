@@ -1,7 +1,7 @@
 {
     "env": {
         "llvmPath": "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64",
-        "msvcPath": "D:/Microsoft Visual Studio/VC/Tools/MSVC/14.51.36231",
+        "msvcPath": "D:/Microsoft Visual Studio/VC/Tools/MSVC/14.44.35207",
         "winSdkPath": "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0",
         "syclPath": "D:/Intel/oneAPI/compiler/latest",
         "level_zeroPath": "D:/Intel/level-zero-win-sdk-1.32.0",

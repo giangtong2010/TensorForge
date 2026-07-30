@@ -13,32 +13,33 @@ namespace at {
     };
 
     class OffsetCalculator {
-        std::vector<int64_t> _shape;
-        std::vector<int64_t> _stride;
+        const int64_t* _shape;
+        const int64_t* _stride;
+        const size_t _ndim;
         size_t _storage_offset;
 
     public:
         OffsetCalculator(
             size_t storage_offset,
-            std::vector<int64_t> shape,
-            std::vector<int64_t> stride
+            const size_t ndim,
+            const int64_t* shape,
+            const int64_t* stride
         )
             : _shape(std::move(shape)),
             _stride(std::move(stride)),
-            _storage_offset(storage_offset) {}
+            _storage_offset(storage_offset),
+            _ndim(ndim) {}
 
         size_t operator()(size_t linear_indx) {
-            return cpp20::compute_offset(
-                _storage_offset,
-                linear_indx,
-                _shape,
-                _stride
-            );
+            for (size_t i = 0; i < _ndim; i++) {
+
+            }
         }
         size_t operator()(size_t linear_indx) const {
             return cpp20::compute_offset(
                 _storage_offset,
                 linear_indx,
+                _ndim,
                 _shape,
                 _stride
             );
@@ -120,7 +121,7 @@ namespace at {
             return cpp20::compute_numel(_commo_shape);
         }
         size_t input_storage_offset(size_t indx = 0) const {
-            return _operands[_num_out + indx + 1]._storage_offset;
+            return _operands[_num_out + indx]._storage_offset;
         }
         size_t output_storage_offset(size_t indx = 0) const {
             return _operands[indx]._storage_offset;
@@ -129,7 +130,7 @@ namespace at {
             return _operands[indx]._ptr;
         }
         const uint8_t* input_ptr(size_t indx = 0) const {
-            return _operands[_num_out + indx + 1]._const_ptr;
+            return _operands[_num_out + indx]._const_ptr;
         }
 
         std::tuple<std::vector<int64_t>, std::vector<int64_t>>
@@ -146,5 +147,7 @@ namespace at {
             return _commo_shape;
         }
         cpp20::Dtype get_out_dtype() const {return out_dtype;}
+        size_t get_input_ndim(size_t indx = 0) const {return _operands[_num_out + indx]._head_shape.size();}
+        size_t get_output_ndim(size_t indx = 0) const {return _operands[_num_out]._head_shape.size();}
     };
 }

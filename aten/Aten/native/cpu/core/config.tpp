@@ -39,15 +39,22 @@ void cpu_kernel(const at::TensorIterator& iter, Func&& op) {
     const scalar_t* a_data = reinterpret_cast<const scalar_t*>(iter.input_ptr(0));
     const scalar_t* b_data = reinterpret_cast<const scalar_t*>(iter.input_ptr(1));
 
+    int64_t* a_shape = std::get<0>(iter.input_size_and_stride(0)).data();
+    int64_t* a_stride = std::get<1>(iter.input_size_and_stride(0)).data();
+    int64_t* b_shape = std::get<0>(iter.input_size_and_stride(1)).data();
+    int64_t* b_stride = std::get<0>(iter.input_size_and_stride(1)).data();
+
     at::OffsetCalculator a_offset(
         iter.input_storage_offset(0),
-        std::get<0>(iter.input_size_and_stride(0)),
-        std::get<1>(iter.input_size_and_stride(0))
+        iter.get_input_ndim(0),
+        a_shape,
+        a_stride
     );
     at::OffsetCalculator b_offset(
         iter.input_storage_offset(1),
-        std::get<0>(iter.input_size_and_stride(1)),
-        std::get<1>(iter.input_size_and_stride(1))
+        iter.get_input_ndim(1),
+        b_shape,
+        b_stride
     );
 
     parallel_for(

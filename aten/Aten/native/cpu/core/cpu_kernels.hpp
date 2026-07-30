@@ -12,6 +12,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -29,10 +30,13 @@ inline at::Tensor contiguous_CPU_Int32(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -50,10 +54,13 @@ inline at::Tensor contiguous_CPU_Float32(const at::Tensor& a, const at::Tensor& 
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -71,10 +78,13 @@ inline at::Tensor contiguous_CPU_Float64(const at::Tensor& a, const at::Tensor& 
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -92,10 +102,13 @@ inline at::Tensor contiguous_CPU_Byte(const at::Tensor& a, const at::Tensor& b) 
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -113,10 +126,13 @@ inline at::Tensor contiguous_CPU_Char(const at::Tensor& a, const at::Tensor& b) 
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -134,10 +150,13 @@ inline at::Tensor contiguous_CPU_Short(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -155,10 +174,13 @@ inline at::Tensor contiguous_CPU_Long(const at::Tensor& a, const at::Tensor& b) 
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -176,10 +198,13 @@ inline at::Tensor contiguous_CPU_ComplexFloat(const at::Tensor& a, const at::Ten
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -197,10 +222,13 @@ inline at::Tensor contiguous_CPU_ComplexDouble(const at::Tensor& a, const at::Te
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_contiguous_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -214,6 +242,8 @@ inline at::Tensor contiguous_CPU_Bool(const at::Tensor& a, const at::Tensor& b) 
 
     
 };
+
+
 
 
 
@@ -256,6 +286,8 @@ inline at::Tensor add_CPU_Int32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -282,6 +314,8 @@ inline at::Tensor add_CPU_Float32(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -316,6 +350,8 @@ inline at::Tensor add_CPU_Float64(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -342,6 +378,8 @@ inline at::Tensor add_CPU_Byte(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -376,6 +414,8 @@ inline at::Tensor add_CPU_Char(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -402,6 +442,8 @@ inline at::Tensor add_CPU_Short(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -436,6 +478,8 @@ inline at::Tensor add_CPU_Long(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -466,6 +510,8 @@ inline at::Tensor add_CPU_ComplexFloat(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -492,6 +538,8 @@ inline at::Tensor add_CPU_ComplexDouble(const at::Tensor& a, const at::Tensor& b
 
     
 };
+
+
 
 
 
@@ -534,6 +582,8 @@ inline at::Tensor add_CPU_Bool(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -560,6 +610,8 @@ inline at::Tensor sub_CPU_Int32(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -594,6 +646,8 @@ inline at::Tensor sub_CPU_Float32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -620,6 +674,8 @@ inline at::Tensor sub_CPU_Float64(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -654,6 +710,8 @@ inline at::Tensor sub_CPU_Byte(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -680,6 +738,8 @@ inline at::Tensor sub_CPU_Char(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -714,6 +774,8 @@ inline at::Tensor sub_CPU_Short(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -740,6 +802,8 @@ inline at::Tensor sub_CPU_Long(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -774,6 +838,8 @@ inline at::Tensor sub_CPU_ComplexFloat(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -800,6 +866,8 @@ inline at::Tensor sub_CPU_ComplexDouble(const at::Tensor& a, const at::Tensor& b
 
     
 };
+
+
 
 
 
@@ -842,6 +910,8 @@ inline at::Tensor sub_CPU_Bool(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -868,6 +938,8 @@ inline at::Tensor mul_CPU_Int32(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -902,6 +974,8 @@ inline at::Tensor mul_CPU_Float32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -928,6 +1002,8 @@ inline at::Tensor mul_CPU_Float64(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -962,6 +1038,8 @@ inline at::Tensor mul_CPU_Byte(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -988,6 +1066,8 @@ inline at::Tensor mul_CPU_Char(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1022,6 +1102,8 @@ inline at::Tensor mul_CPU_Short(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1048,6 +1130,8 @@ inline at::Tensor mul_CPU_Long(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1082,6 +1166,8 @@ inline at::Tensor mul_CPU_ComplexFloat(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1108,6 +1194,8 @@ inline at::Tensor mul_CPU_ComplexDouble(const at::Tensor& a, const at::Tensor& b
 
     
 };
+
+
 
 
 
@@ -1150,10 +1238,13 @@ inline at::Tensor mul_CPU_Bool(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1171,10 +1262,13 @@ inline at::Tensor matmul_CPU_Int32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1192,10 +1286,13 @@ inline at::Tensor matmul_CPU_Float32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1213,10 +1310,13 @@ inline at::Tensor matmul_CPU_Float64(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1234,10 +1334,13 @@ inline at::Tensor matmul_CPU_Byte(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1255,10 +1358,13 @@ inline at::Tensor matmul_CPU_Char(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1276,10 +1382,13 @@ inline at::Tensor matmul_CPU_Short(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1297,10 +1406,13 @@ inline at::Tensor matmul_CPU_Long(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1318,10 +1430,13 @@ inline at::Tensor matmul_CPU_ComplexFloat(const at::Tensor& a, const at::Tensor&
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1339,10 +1454,13 @@ inline at::Tensor matmul_CPU_ComplexDouble(const at::Tensor& a, const at::Tensor
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_matmul_CPU(const at::Tensor&, const at::Tensor&, at::Tensor&);
+
     
 }
 
@@ -1356,6 +1474,8 @@ inline at::Tensor matmul_CPU_Bool(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1398,6 +1518,8 @@ inline at::Tensor div_CPU_Int32(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1424,6 +1546,8 @@ inline at::Tensor div_CPU_Float32(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1458,6 +1582,8 @@ inline at::Tensor div_CPU_Float64(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1484,6 +1610,8 @@ inline at::Tensor div_CPU_Byte(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1518,6 +1646,8 @@ inline at::Tensor div_CPU_Char(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1544,6 +1674,8 @@ inline at::Tensor div_CPU_Short(const at::Tensor& a, const at::Tensor& b) {
 
     
 };
+
+
 
 
 
@@ -1578,6 +1710,8 @@ inline at::Tensor div_CPU_Long(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1608,6 +1742,8 @@ inline at::Tensor div_CPU_ComplexFloat(const at::Tensor& a, const at::Tensor& b)
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
@@ -1634,6 +1770,8 @@ inline at::Tensor div_CPU_ComplexDouble(const at::Tensor& a, const at::Tensor& b
 
     
 };
+
+
 
 
 
@@ -1676,10 +1814,13 @@ inline at::Tensor div_CPU_Bool(const at::Tensor& a, const at::Tensor& b) {
 
 
 
+
+
 namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1696,6 +1837,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1712,6 +1854,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1728,6 +1871,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1744,6 +1888,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1760,6 +1905,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1776,6 +1922,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1792,6 +1939,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1808,6 +1956,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1824,6 +1973,7 @@ namespace cpu {
     
     template <typename T>
     void kernel_copy_CPU(at::Tensor&, const at::Tensor&);
+
     
 }
 
@@ -1831,6 +1981,372 @@ namespace cpu {
 inline void copy_CPU_Bool(at::Tensor& dst, const at::Tensor& src) {
     using type = cpp20::DtypeToCPPType<cpp20::Dtype::Bool>::type;
     cpu::kernel_copy_CPU<type>(dst, src);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Int32(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Int32>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Float32(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Float32>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Float64(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Float64>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Byte(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Byte>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Char(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Char>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Short(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Short>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Long(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Long>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_ComplexFloat(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::ComplexFloat>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_ComplexDouble(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::ComplexDouble>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_cpymem_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void cpymem_CPU_Bool(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Bool>::type;
+    cpu::kernel_cpymem_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Int32(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Int32>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Float32(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Float32>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Float64(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Float64>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Byte(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Byte>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Char(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Char>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Short(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Short>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Long(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Long>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_ComplexFloat(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::ComplexFloat>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_ComplexDouble(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::ComplexDouble>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
+}
+
+
+
+
+namespace cpu {
+    
+    template <typename T>
+    void kernel_copy_from_host_CPU(void*, const void*, cpp20::Dtype, const size_t);
+
+    
+}
+
+
+inline void copy_from_host_CPU_Bool(void* dst, const void* src, cpp20::Dtype dtype, const size_t size) {
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::Bool>::type;
+    cpu::kernel_copy_from_host_CPU<type>(dst, src, dtype, size);
 }
 
 

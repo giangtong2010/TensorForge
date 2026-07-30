@@ -1,5 +1,6 @@
 #include "xpu_kernels.hpp"
 #include "utils.hpp"
+#include "_util.hpp"
 #include "Allocator.hpp"
 #include "Dtype.hpp"
 #include "tensor.hpp"
@@ -46,6 +47,7 @@ namespace xpu {
 
         sycl::device device = q.get_device();
         size_t elem_size = cpp20::dtype_size(in.get_dtype());
+        size_t offset = in.get_storage_offset();
         size_t LOCAL = 256;
         size_t GLOBAL =
             ((numel + LOCAL - 1) / LOCAL) * LOCAL;
@@ -53,9 +55,15 @@ namespace xpu {
         auto* src = reinterpret_cast<const T*>(old_data);
         auto* dst = reinterpret_cast<T*>(new_data);
 
+        int64_t* size_dev = xpu::utils::malloc_shared_copy<int64_t>(size, size.size(), q);
+        int64_t* old_stride_dev = xpu::utils::malloc_shared_copy<int64_t>(old_stride, old_stride.size(), q);
+        int64_t* new_stride_dev = xpu::utils::malloc_shared_copy<int64_t>(new_stride, new_stride.size(), q);
+
+        size_t n = new_stride.size();
+
         q.parallel_for(
             sycl::nd_range<1>(GLOBAL, LOCAL),
-            [&](sycl::nd_item<1> item) {
+            [=](sycl::nd_item<1> item) {
                 size_t k = item.get_global_linear_id();
 
                 if (k >= numel) {
@@ -63,11 +71,11 @@ namespace xpu {
                 }
 
                 size_t linear_indx = k;
-                size_t old_offset = in.get_storage_offset();
+                size_t old_offset = offset;
 
-                for (size_t  i = 0; i < new_stride.size(); i++) {
-                    auto indx = (linear_indx / new_stride[i]) % size[i];
-                    old_offset += indx * old_stride[i];
+                for (size_t  i = 0; i < n; i++) {
+                    auto indx = (linear_indx / new_stride_dev[i]) % size_dev[i];
+                    old_offset += indx * old_stride_dev[i];
                 }
                 
                 dst[k] = src[old_offset];
@@ -175,6 +183,37 @@ namespace xpu {
     }
 
     template <typename T>
+    void kernel_memcpy_XPU(void* dst, const void* src, const size_t numel) {
+        sycl::queue& q_dst = based_queues::instance().get_queue(reinterpret_cast<uint8_t*>(dst));
+        sycl::queue& q_src = based_queues::instance().get_queue(reinterpret_cast<const uint8_t*>(src));
+
+        assert(q_dst.get_context() == q_src.get_context());
+        assert(q_dst.get_device() == q_src.get_device());
+
+        q_dst.memcpy(dst, src, numel * sizeof(T));
+    }
+    template <typename T>
+    void kernel_copy_from_host_CPU(void* dst, const void* src, cpp20::Dtype dtype, const size_t numel) {
+        sycl::queue& q_dst = based_queues::instance().get_queue(reinterpret_cast<uint8_t*>(dst));
+        sycl::queue& q_src = based_queues::instance().get_queue(reinterpret_cast<const uint8_t*>(src));
+
+        assert(q_dst.get_context() == q_src.get_context());
+        assert(q_dst.get_device() == q_src.get_device());
+
+        const T* src_ptr = reinterpret_cast<const T*>(src);
+        T* dst_ptr = reinterpret_cast<T*>(dst);
+
+        dtype = cpp20::promote_dtype(
+            dtype, cpp20::CPPTypeToDtype<T>::value
+        );
+
+        q_dst.parallel_for(sycl::range<1>(numel), [=](sycl::id<1> id) {
+            auto i = id[0];
+            dst_ptr[i] = src_ptr[i];
+        });
+    }
+
+    template <typename T>
     void kernel_copy_XPU(at::Tensor& dst, const at::Tensor& src) {
         if (dst.get_numel() != src.get_numel())
             throw std::runtime_error("copy: tensor sizes do not match");
@@ -182,10 +221,10 @@ namespace xpu {
             throw std::runtime_error("copy: tensors must be contiguous");
 
         T* dst_ptr = reinterpret_cast<T*>(dst.data());
-        const T* src_ptr = reinterpret_cast<T*>(src.data());
+        const T* src_ptr = reinterpret_cast<const T*>(src.data());
 
-        sycl::queue& q_dst = based_queues::instance().get_queue(dst_ptr);
-        sycl::queue& q_src = based_queues::instance().get_queue(src_ptr);
+        sycl::queue& q_dst = based_queues::instance().get_queue(reinterpret_cast<uint8_t*>(dst_ptr));
+        sycl::queue& q_src = based_queues::instance().get_queue(reinterpret_cast<const uint8_t*>(src_ptr));
 
         assert(q_dst.get_context() == q_src.get_context());
         assert(q_dst.get_device() == q_src.get_device());

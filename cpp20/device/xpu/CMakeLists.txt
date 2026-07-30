@@ -16,8 +16,11 @@ target_include_directories(xpu
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/core
         ${CMAKE_SOURCE_DIR}/cpp20/cpp20_include
+
+    SYSTEM PRIVATE
         ${SYCL_INCLUDE_DIR}
         ${LEVEL_ZERO_INCLUDE_DIR}/level_zero
+
     PUBLIC 
         ${CMAKE_CURRENT_SOURCE_DIR}/xpu_include
 )

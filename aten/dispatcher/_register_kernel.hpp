@@ -28,3 +28,16 @@ namespace {                                                                     
         return true;                                                            \
     }();                                                                        \
 }                                                                               \
+
+#define REGISTER_MEMCPY_KERNEL(op, backend, type, kernel)                       \
+namespace {                                                                     \
+    static bool reg_##op##_##backend##_##type = []() {                          \
+        dispatcher::Dispatcher::instance().register_memcpy_kernel(              \
+            dispatcher::OP::op,                                                 \
+            cpp20::DeviceType::backend,                                         \
+            cpp20::Dtype::type,                                                 \
+            kernel                                                              \
+        );                                                                      \
+        return true;                                                            \
+    }();                                                                        \
+}                                                                               \

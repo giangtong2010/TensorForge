@@ -1,5 +1,6 @@
 #include "dispatcher/dispatcher.hpp"
 #include "_Dtype.hpp"
+#include "tensor.hpp"
 
 auto& dispatchers = dispatcher::Dispatcher::instance();
 class InitData {

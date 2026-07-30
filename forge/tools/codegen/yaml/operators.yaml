@@ -10,3 +10,5 @@ operators:
   - name: matmul
   - name: div
   - name: copy
+  - name: cpymem
+  - name: copy_from_host

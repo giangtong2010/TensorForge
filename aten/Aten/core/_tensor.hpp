@@ -14,8 +14,26 @@ namespace at {
             std::initializer_list<T>,
             cpp20::Dtype,
             cpp20::Device,
-            bool
+            bool requires_grad = false
         );
+        template <typename T>
+        Tensor(
+            std::initializer_list<T>,
+            cpp20::Device,
+            bool requires_grad = false
+        );
+        template <typename T>
+        Tensor(
+            std::initializer_list<T>,
+            bool requires_grad = false
+        );
+        template <typename T>
+        Tensor(
+            std::initializer_list<T>,
+            cpp20::Dtype,
+            bool requires_grad = false
+        );
+
         Tensor() = default;
         Tensor(
             cpp20::intrusive_ptr<TensorImpl> impl
@@ -106,3 +124,5 @@ namespace at {
         const size_t get_storage_offset() const noexcept {return _impl->_storage_offset;};
     };
 }
+
+#include "_tensor_constrcutor.tpp"

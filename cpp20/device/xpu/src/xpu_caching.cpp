@@ -40,7 +40,7 @@ namespace xpu {
             _queues.push_back(queue);
             _device.emplace_back(std::move(gpus[i]));
 
-            auto based_queues = based_queues::instance();
+            auto& based_queues = based_queues::instance();
             based_queues.add_queue_and_indx(queue, i);
         }
     }
