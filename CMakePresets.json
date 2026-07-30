@@ -7,7 +7,6 @@
             "binaryDir": "build",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "clang-cl",
-                "CMAKE_CXX_COMPILER_FRONTEND_VARIANT": "GNU",
                 "CMAKE_CXX_FLAGS": "/fsycl /W0 /EHsc",
                 "CMAKE_PREFIX_PATH": "D:/Intel/level-zero-win-sdk-1.32.0"
             }

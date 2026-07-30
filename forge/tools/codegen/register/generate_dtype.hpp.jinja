@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <stdexcept>
 #include <complex>
+#include <iostream>
+#include <string>
 
 namespace cpp20 {
     enum class Dtype {
@@ -43,7 +45,7 @@ namespace cpp20 {
     };
     {% endfor %}
 
-    constexpr cpp20::Dtype PROMOTION_TABLE[{{ dtypes|length }}][{{ dtypes|length }}] = {
+    inline constexpr cpp20::Dtype PROMOTION_TABLE[{{ dtypes|length }}][{{ dtypes|length }}] = {
         {% for row in promote_tab %}
         {
             {% for dtype in row %}
@@ -53,7 +55,15 @@ namespace cpp20 {
         {% endfor %}
     };
 
-    cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
+    inline cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
         return PROMOTION_TABLE[(size_t) a][(size_t) b];
+    }
+}
+
+inline std::ostream& operator<<(std::ostream& os, const cpp20::Dtype dtype) {
+    switch (dtype) {
+        {% for dtype in dtypes %}
+        case cpp20::Dtype::{{ dtype.name }}: std::cout <<"{{ dtype.name }}";
+        {% endfor %}
     }
 }

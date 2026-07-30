@@ -1,5 +1,6 @@
 #include "tensor.hpp"
 #include <vector>
+#include <iostream>
 
 int main() {
     auto device = cpp20::Device(
@@ -16,4 +17,6 @@ int main() {
         device,
         false
     );
+
+    std::cout <<tensor;
 }

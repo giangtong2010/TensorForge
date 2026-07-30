@@ -3,8 +3,11 @@
 #include <cstdint>
 #include <cstddef>
 #include <vector>
+#include <iosfwd>
 
 namespace at {
+    class Tensor;
+
     namespace impl {
         // view ops func, define in _view_ops.cpp (FINSH)
         at::Tensor view(const at::Tensor&, const std::vector<int64_t>&);
@@ -43,3 +46,5 @@ namespace at {
         at::Tensor matmul(const at::Tensor&, const at::Tensor&);
     }
 }
+
+std::ostream& operator<<(std::ostream& os, const at::Tensor& tensor);

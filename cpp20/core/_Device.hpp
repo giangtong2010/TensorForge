@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <format>
 #include <utility>
+#include <iostream>
+#include <string>
 
 #if defined(__clang__) || defined(__GNUC__)
     #define TF_UNREACHABLE() __builtin_unreachable()
@@ -58,3 +60,19 @@ struct std::formatter<cpp20::DeviceType> : std::formatter<std::string_view> {
         return std::formatter<std::string_view>::format(name, ctx);
     }
 };
+
+inline std::ostream& operator<<(std::ostream& os, const cpp20::Device device) {
+    switch (device._dev_type) {
+        
+        case cpp20::DeviceType::CPU: {
+            std::string dev = "cpu:" + std::to_string(device._dev_indx);
+            std::cout <<dev;
+        }
+        
+        case cpp20::DeviceType::XPU: {
+            std::string dev = "xpu:" + std::to_string(device._dev_indx);
+            std::cout <<dev;
+        }
+        
+    }
+}

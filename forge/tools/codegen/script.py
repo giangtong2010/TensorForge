@@ -4,6 +4,7 @@ import generate_cpu_kn as gck
 import generate_xpu_kn as gxk
 import generate_dtype as gd
 import generate_device as gen_dev
+import generate_ovl_stream as gos
 
 from pathlib import Path
 
@@ -33,3 +34,7 @@ with open(output_path, "w") as cpu_kernels:
 output_path = ROOT_PRJ / "aten/Aten/native/xpu/core/xpu_kernels.hpp"
 with open(output_path, "w") as xpu_kernels:
     xpu_kernels.write(gxk.code)
+
+output_path = ROOT_PRJ / "aten/Aten/src/_def_ostream.cpp"
+with open(output_path, "w") as def_ostream:
+    def_ostream.write(gos.code)

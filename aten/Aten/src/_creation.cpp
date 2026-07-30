@@ -5,6 +5,8 @@
 #include "_storage_impl.hpp"
 #include "_tensor_impl.hpp"
 
+#include <iostream>
+
 namespace at::impl {
     Tensor empty(const std::vector<int64_t>& size, cpp20::Dtype dtype, cpp20::Device device) {
         size_t numel = cpp20::compute_numel(size);

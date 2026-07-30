@@ -1,3 +1,6 @@
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(FindSYCL)
+
 add_executable(
     test_xpu_alloc test_xpu_alloc.cpp
 )
@@ -12,10 +15,14 @@ target_link_libraries(test_xpu_alloc
     PRIVATE 
         cpp20
         aten
+        ${SYCL_LIB_DIR}
 )
 target_link_libraries(test_cpu_alloc 
     PRIVATE 
         cpp20
         aten
+        ${SYCL_LIB_DIR}
 )
-target_link_libraries(test_sycl)
+target_link_libraries(test_sycl PRIVATE 
+    ${SYCL_LIB_DIR}
+)

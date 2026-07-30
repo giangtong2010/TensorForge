@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <stdexcept>
 #include <complex>
+#include <iostream>
+#include <string>
 
 namespace cpp20 {
     enum class Dtype {
@@ -169,7 +171,7 @@ namespace cpp20 {
     };
     
 
-    constexpr cpp20::Dtype PROMOTION_TABLE[10][10] = {
+    inline constexpr cpp20::Dtype PROMOTION_TABLE[10][10] = {
         
         {
             
@@ -413,7 +415,33 @@ namespace cpp20 {
         
     };
 
-    cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
+    inline cpp20::Dtype promote_dtype(cpp20::Dtype a, cpp20::Dtype b) {
         return PROMOTION_TABLE[(size_t) a][(size_t) b];
+    }
+}
+
+inline std::ostream& operator<<(std::ostream& os, const cpp20::Dtype dtype) {
+    switch (dtype) {
+        
+        case cpp20::Dtype::Int32: std::cout <<"Int32";
+        
+        case cpp20::Dtype::Float32: std::cout <<"Float32";
+        
+        case cpp20::Dtype::Float64: std::cout <<"Float64";
+        
+        case cpp20::Dtype::Byte: std::cout <<"Byte";
+        
+        case cpp20::Dtype::Char: std::cout <<"Char";
+        
+        case cpp20::Dtype::Short: std::cout <<"Short";
+        
+        case cpp20::Dtype::Long: std::cout <<"Long";
+        
+        case cpp20::Dtype::ComplexFloat: std::cout <<"ComplexFloat";
+        
+        case cpp20::Dtype::ComplexDouble: std::cout <<"ComplexDouble";
+        
+        case cpp20::Dtype::Bool: std::cout <<"Bool";
+        
     }
 }

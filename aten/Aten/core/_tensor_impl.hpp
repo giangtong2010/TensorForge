@@ -27,11 +27,12 @@ namespace at {
         )
             : _storage(std::move(storage)),
             _size(std::move(size)),
-            _stride(cpp20::compute_strides(size)),
             _dtype(dtype),
             _device(device),
-            _storage_offset(storage_offset),
-            _numel(cpp20::compute_numel(size)) {};
+            _storage_offset(storage_offset) {
+                _stride = cpp20::compute_strides(_size);
+                _numel = cpp20::compute_numel(_size);
+            };
 
         TensorImpl(
             Storage storage,
