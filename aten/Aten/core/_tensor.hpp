@@ -125,4 +125,6 @@ namespace at {
     };
 }
 
+std::ostream& operator<<(std::ostream&, const at::Tensor&);
+std::ostream& operator<<(std::ostream&, at::Tensor&);
 #include "_tensor_constrcutor.tpp"

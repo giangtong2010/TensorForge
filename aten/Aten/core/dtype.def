@@ -1,0 +1,23 @@
+// type.def
+// This is file for codegen, do not doing anything in this file
+
+
+X(Int32)
+
+X(Float32)
+
+X(Float64)
+
+X(Byte)
+
+X(Char)
+
+X(Short)
+
+X(Long)
+
+X(ComplexFloat)
+
+X(ComplexDouble)
+
+X(Bool)

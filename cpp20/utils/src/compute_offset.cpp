@@ -2,6 +2,19 @@
 
 namespace cpp20 {
     SYCL_EXTERNAL size_t compute_offset(
+        size_t storage_offset,
+        const std::vector<int64_t>& size,
+        const std::vector<int64_t>& stride
+    ) noexcept {
+        size_t offset = storage_offset;
+        for (size_t i = 0; i < size.size(); i++) {
+            auto indx = stride[i] * size[i];
+            offset += indx;
+        }
+        return offset;
+    };
+
+    SYCL_EXTERNAL size_t compute_offset(
         size_t storage_offset, 
         const std::vector<size_t>& spatial_index,
         const std::vector<int64_t>& strides 

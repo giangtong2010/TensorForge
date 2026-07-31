@@ -2,7 +2,7 @@ import generate_op as go
 import generate_op_struct as gt
 import generate_dtype as gd
 import generate_device as gen_dev
-import generate_ovl_stream as gos
+import generate_type_def as gtf
 import cpu
 import xpu
 
@@ -27,9 +27,9 @@ output_path = ROOT_PRJ / "aten/dispatcher/_op.hpp"
 with open(output_path, "w") as table:
     table.write(gt.code)
 
-output_path = ROOT_PRJ / "aten/Aten/src/_def_ostream.cpp"
+output_path = ROOT_PRJ / "aten/Aten/core/dtype.def"
 with open(output_path, "w") as def_ostream:
-    def_ostream.write(gos.code)
+    def_ostream.write(gtf.code)
 
 cpu.write()
 xpu.write()

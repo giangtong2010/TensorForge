@@ -46,5 +46,3 @@ namespace at {
         at::Tensor matmul(const at::Tensor&, const at::Tensor&);
     }
 }
-
-std::ostream& operator<<(std::ostream& os, const at::Tensor& tensor);
