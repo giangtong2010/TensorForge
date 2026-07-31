@@ -1,34 +1,17 @@
 #include "dispatcher/register_kernel.hpp"
-#include "dispatcher/_table.hpp"
+#include "dispatcher/_op.hpp"
 #include "tensor.hpp"
 #include "kernel/kernel.hpp"
 
 {% for op in operators %}
 {% for backend in backends %}
 {% for dtype in dtypes %}
-
-{% if op.name == "copy" %}
-REGISTER_COPY_KERNEL(
-    {{ backend }},
-    {{ dtype.name }},
-    {{ op.name }}_{{ backend }}_{{ dtype.name }}
-);
-{% elif op.name == "cpymem" or op.name == "copy_from_host" %}
-REGISTER_MEMCPY_KERNEL(
-    {{ op.name }},
-    {{ backend }},
-    {{ dtype.name }},
-    {{ op.name }}_{{ backend }}_{{ dtype.name }}
-);
-{% else %}
 REGISTER_KERNEL(
-    {{ op.name }}, 
+    {{ op }},
     {{ backend }},
     {{ dtype.name }},
-    {{ op.name }}_{{ backend }}_{{ dtype.name }}
+    {{ op }}_{{ backend }}_{{ dtype.name }}
 );
-{% endif %}
-
 {% endfor %}
 {% endfor %}
 {% endfor %}

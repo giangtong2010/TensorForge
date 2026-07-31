@@ -2,13 +2,22 @@ include:
   - backends.yaml
   - dtypes.yaml
 
-operators:
-  - name: contiguous
-  - name: add
-  - name: sub
-  - name: mul
+element_wise:
+  binary_ops:
+    - name: add
+    - name: sub
+    - name: mul
+    - name: div
+    - name: pow
+
+memory:
+  memory_ops:
+    - name: contiguous
+    - name: copy
+
+  memory_kn:
+    - name: cpymem
+    - name: copy_from_host
+
+linalg_ops:
   - name: matmul
-  - name: div
-  - name: copy
-  - name: cpymem
-  - name: copy_from_host

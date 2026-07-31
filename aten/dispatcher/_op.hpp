@@ -4,17 +4,17 @@
 namespace dispatcher {
     enum class OP {
         
-        contiguous,
-        
         add,
         
         sub,
         
         mul,
         
-        matmul,
-        
         div,
+        
+        pow,
+        
+        contiguous,
         
         copy,
         
@@ -22,6 +22,8 @@ namespace dispatcher {
         
         copy_from_host,
         
-        count = 9
+        matmul,
+        
+        count = 10
     };
 }

@@ -423,25 +423,25 @@ namespace cpp20 {
 inline std::ostream& operator<<(std::ostream& os, const cpp20::Dtype dtype) {
     switch (dtype) {
         
-        case cpp20::Dtype::Int32: std::cout <<"Int32";
+        case cpp20::Dtype::Int32: return os << "Int32";
         
-        case cpp20::Dtype::Float32: std::cout <<"Float32";
+        case cpp20::Dtype::Float32: return os << "Float32";
         
-        case cpp20::Dtype::Float64: std::cout <<"Float64";
+        case cpp20::Dtype::Float64: return os << "Float64";
         
-        case cpp20::Dtype::Byte: std::cout <<"Byte";
+        case cpp20::Dtype::Byte: return os << "Byte";
         
-        case cpp20::Dtype::Char: std::cout <<"Char";
+        case cpp20::Dtype::Char: return os << "Char";
         
-        case cpp20::Dtype::Short: std::cout <<"Short";
+        case cpp20::Dtype::Short: return os << "Short";
         
-        case cpp20::Dtype::Long: std::cout <<"Long";
+        case cpp20::Dtype::Long: return os << "Long";
         
-        case cpp20::Dtype::ComplexFloat: std::cout <<"ComplexFloat";
+        case cpp20::Dtype::ComplexFloat: return os << "ComplexFloat";
         
-        case cpp20::Dtype::ComplexDouble: std::cout <<"ComplexDouble";
+        case cpp20::Dtype::ComplexDouble: return os << "ComplexDouble";
         
-        case cpp20::Dtype::Bool: std::cout <<"Bool";
+        case cpp20::Dtype::Bool: return os << "Bool";
         
     }
 }

@@ -1,22 +1,15 @@
 #include "tensor.hpp"
-#include <vector>
 #include <iostream>
+using namespace at;
 
 int main() {
-    auto device = cpp20::Device(
-        cpp20::DeviceType::XPU,
-        0
-    );
-    auto tensor = at::Tensor(
+    Tensor tensor = Tensor(
         std::initializer_list<std::initializer_list<int>> {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 9}
+            {1, 2, 3, 5, 6},
+            {7, 8, 9, 10, 11}
         },
         cpp20::Dtype::Float32,
-        device,
-        false
+        cpp20::Device(cpp20::DeviceType::CPU, 0)
     );
-
     std::cout <<tensor;
 }

@@ -128,8 +128,8 @@ namespace at {
             0
         );
 
-        dispatcher::MemcpyKernelFn copy_from_host_kernel =
-            dispatcher::Dispatcher::instance().get_memcpy_kernel(
+        dispatcher::MemKernelFn copy_from_host_kernel =
+            dispatcher::Dispatcher::instance().get_kernel<dispatcher::MemKernelFn>(
                 dispatcher::OP::copy_from_host, device._dev_type, dtype
             );
         

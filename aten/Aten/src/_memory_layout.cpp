@@ -26,15 +26,17 @@ namespace at::impl {
     Tensor contiguous(const Tensor& tensor) noexcept {
         if (tensor.is_contiguous())
             return tensor;
+        
+            Tensor out = tensor.clone();
 
-            dispatcher::KernelFn contiguous =
-                dispatcher::Dispatcher::instance().get_kernel(
-                    dispatcher::OP::contiguous,
-                    tensor.get_device()._dev_type,
-                    tensor.get_dtype()
-                );
+        dispatcher::MemOpsKernelFn contiguous =
+            dispatcher::Dispatcher::instance().get_kernel<dispatcher::MemOpsKernelFn>(
+                dispatcher::OP::contiguous,
+                tensor.get_device()._dev_type,
+                tensor.get_dtype()
+            );
 
-        return contiguous(tensor, tensor);
+        return contiguous(out, tensor);
     }
 
     Tensor clone(const Tensor& tensor) noexcept {
@@ -62,8 +64,9 @@ namespace at::impl {
             );
 
         Tensor out(tensor_impl);
-        dispatcher::CopyKernelFn copy_kernel = 
-            dispatcher::Dispatcher::instance().get_copy_kernel(
+        dispatcher::MemOpsKernelFn copy_kernel = 
+            dispatcher::Dispatcher::instance().get_kernel<dispatcher::MemOpsKernelFn>(
+                dispatcher::OP::copy,
                 tensor.get_device()._dev_type,
                 tensor.get_dtype()
             );

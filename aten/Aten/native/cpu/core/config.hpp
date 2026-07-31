@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include "_tensor_iterator.hpp"
 
 template <class function>
 void parallel_for(

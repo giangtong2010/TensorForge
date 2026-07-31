@@ -63,7 +63,7 @@ namespace cpp20 {
 inline std::ostream& operator<<(std::ostream& os, const cpp20::Dtype dtype) {
     switch (dtype) {
         {% for dtype in dtypes %}
-        case cpp20::Dtype::{{ dtype.name }}: std::cout <<"{{ dtype.name }}";
+        case cpp20::Dtype::{{ dtype.name }}: return os << "{{ dtype.name }}";
         {% endfor %}
     }
 }

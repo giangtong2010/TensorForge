@@ -4,7 +4,10 @@ include(FindSYCL)
 find_package(SYCL REQUIRED)
 
 add_library(xpu_kernel STATIC 
-    src/xpu_kernel.cpp
+    src/xpu_binary_ops.cpp
+    src/xpu_linalg_ops.cpp
+    src/xpu_memory_kn.cpp
+    src/xpu_memory_ops.cpp
 )
 
 target_link_libraries(xpu_kernel
@@ -16,6 +19,8 @@ target_link_libraries(xpu_kernel
 
 target_include_directories(xpu_kernel
     PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/core
+
         ${CMAKE_SOURCE_DIR}/aten/aten_include 
         ${CMAKE_SOURCE_DIR}/aten/Aten/core
 
@@ -28,5 +33,5 @@ target_include_directories(xpu_kernel
         ${SYCL_INCLUDE_DIR}
 
     PUBLIC 
-        ${CMAKE_CURRENT_SOURCE_DIR}/core
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )

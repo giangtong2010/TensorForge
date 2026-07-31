@@ -66,12 +66,12 @@ inline std::ostream& operator<<(std::ostream& os, const cpp20::Device device) {
         
         case cpp20::DeviceType::CPU: {
             std::string dev = "cpu:" + std::to_string(device._dev_indx);
-            std::cout <<dev;
+            return os <<dev;
         }
         
         case cpp20::DeviceType::XPU: {
             std::string dev = "xpu:" + std::to_string(device._dev_indx);
-            std::cout <<dev;
+            return os <<dev;
         }
         
     }

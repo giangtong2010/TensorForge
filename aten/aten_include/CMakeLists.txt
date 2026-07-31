@@ -2,6 +2,8 @@ add_library(aten_include INTERFACE)
 
 target_include_directories(aten_include INTERFACE 
     ${CMAKE_SOURCE_DIR}/aten/dispatcher
+    ${CMAKE_SOURCE_DIR}/aten/Aten/native/cpu
+    ${CMAKE_SOURCE_DIR}/aten/Aten/native/xpu
     ${CMAKE_SOURCE_DIR}/aten/Aten/native/cpu/core
     ${CMAKE_SOURCE_DIR}/aten/Aten/native/xpu/core
     ${CMAKE_SOURCE_DIR}/aten/Aten/core
@@ -11,7 +13,6 @@ target_include_directories(aten_include INTERFACE
 target_sources(aten_include INTERFACE 
     kernel/kernel.hpp
 
-    dispatcher/at_dispatcher_kernel.hpp
     dispatcher/dispatcher.hpp
     dispatcher/register_kernel.hpp
 

@@ -25,13 +25,15 @@ public:
 };
 
 namespace at::impl {
+    using type = dispatcher::BinaryKernelFn;
+
     Tensor add(const Tensor& a, const Tensor& b) {
         InitData init = InitData(a, b);
         auto out_dtype = init.get_out_dtype();
         auto dev = init.get_device();
 
-        dispatcher::KernelFn add_kernel =
-            dispatchers.get_kernel(
+        type add_kernel =
+            dispatchers.get_kernel<type>(
                 dispatcher::OP::add,
                 dev,
                 out_dtype
@@ -43,8 +45,8 @@ namespace at::impl {
         auto out_dtype = init.get_out_dtype();
         auto dev = init.get_device();
 
-        dispatcher::KernelFn sub_kernel = 
-            dispatchers.get_kernel(
+        type sub_kernel = 
+            dispatchers.get_kernel<type>(
                 dispatcher::OP::sub,
                 dev,
                 out_dtype
@@ -57,8 +59,8 @@ namespace at::impl {
             auto out_dtype = init.get_out_dtype();
             auto dev = init.get_device();
 
-            dispatcher::KernelFn mul_kernel = 
-                dispatchers.get_kernel(
+            type mul_kernel = 
+                dispatchers.get_kernel<type>(
                     dispatcher::OP::mul,
                     dev,
                     out_dtype
@@ -77,8 +79,8 @@ namespace at::impl {
         auto out_dtype = init.get_out_dtype();
         auto dev = init.get_device();
 
-        dispatcher::KernelFn div_kernel = 
-            dispatchers.get_kernel(
+        type div_kernel = 
+            dispatchers.get_kernel<type>(
                 dispatcher::OP::div,
                 dev,
                 out_dtype
@@ -90,8 +92,8 @@ namespace at::impl {
         auto out_dtype = init.get_out_dtype();
         auto dev = init.get_device();
 
-        dispatcher::KernelFn matmul_kernel = 
-            dispatchers.get_kernel(
+        type matmul_kernel = 
+            dispatchers.get_kernel<type>(
                 dispatcher::OP::matmul,
                 dev,
                 out_dtype

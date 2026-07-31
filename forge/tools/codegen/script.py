@@ -1,10 +1,10 @@
 import generate_op as go
-import generate_table as gt
-import generate_cpu_kn as gck
-import generate_xpu_kn as gxk
+import generate_op_struct as gt
 import generate_dtype as gd
 import generate_device as gen_dev
 import generate_ovl_stream as gos
+import cpu
+import xpu
 
 from pathlib import Path
 
@@ -23,18 +23,13 @@ output_path = ROOT_PRJ / "aten/dispatcher/register.cpp"
 with open(output_path, "w") as register:
     register.write(go.code)
 
-output_path = ROOT_PRJ / "aten/dispatcher/_table.hpp"
+output_path = ROOT_PRJ / "aten/dispatcher/_op.hpp"
 with open(output_path, "w") as table:
     table.write(gt.code)
-
-output_path = ROOT_PRJ / "aten/Aten/native/cpu/core/cpu_kernels.hpp"
-with open(output_path, "w") as cpu_kernels:
-    cpu_kernels.write(gck.code)
-
-output_path = ROOT_PRJ / "aten/Aten/native/xpu/core/xpu_kernels.hpp"
-with open(output_path, "w") as xpu_kernels:
-    xpu_kernels.write(gxk.code)
 
 output_path = ROOT_PRJ / "aten/Aten/src/_def_ostream.cpp"
 with open(output_path, "w") as def_ostream:
     def_ostream.write(gos.code)
+
+cpu.write()
+xpu.write()

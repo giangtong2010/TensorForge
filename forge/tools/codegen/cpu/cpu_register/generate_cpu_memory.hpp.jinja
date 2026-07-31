@@ -1,0 +1,25 @@
+#pragma once
+#include "tensor.hpp"
+#include "Dtype.hpp"
+
+{% for op in operators %}
+{% for backend in backends %}
+{% if backend == "CPU" %}
+{% for dtype in dtypes %}
+
+namespace cpu {
+    template <typename T>
+    void kernel_{{ op.name }}_{{ backend }}(at::Tensor&, const at::Tensor&);
+}
+
+inline at::Tensor {{ op.name }}_{{ backend }}_{{ dtype.name }}(at::Tensor& dst, const at::Tensor& src) {
+    at::Tensor c;
+    using type = cpp20::DtypeToCPPType<cpp20::Dtype::{{ dtype.name }}>::type;
+    cpu::kernel_{{ op.name }}_{{ backend }}<type>(dst, src);
+    return c;
+};
+
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endfor %}

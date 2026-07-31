@@ -4,7 +4,7 @@
 namespace dispatcher {
     enum class OP {
         {% for op in operators %}
-        {{ op.name }},
+        {{ op }},
         {% endfor %}
         count = {{ operators|length }}
     };

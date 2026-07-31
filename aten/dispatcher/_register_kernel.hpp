@@ -1,6 +1,6 @@
 #pragma once
 #include "_dispatcher.hpp"
-#include "_table.hpp"
+#include "_op.hpp"
 #include "Dtype.hpp"
 #include "Device.hpp"
 
@@ -8,31 +8,6 @@
 namespace {                                                                     \
     static bool reg_##op##_##backend##_##type = []() {                          \
         dispatcher::Dispatcher::instance().register_kernel(                     \
-            dispatcher::OP::op,                                                 \
-            cpp20::DeviceType::backend,                                         \
-            cpp20::Dtype::type,                                                 \
-            kernel                                                              \
-        );                                                                      \
-        return true;                                                            \
-    }();                                                                        \
-}                                                                               \
-
-#define REGISTER_COPY_KERNEL(backend, type, kernel)                             \
-namespace {                                                                     \
-    static bool reg_copy_##backend##_##type = []() {                            \
-        dispatcher::Dispatcher::instance().register_copy_kernel(                \
-            cpp20::DeviceType::backend,                                         \
-            cpp20::Dtype::type,                                                 \
-            kernel                                                              \
-        );                                                                      \
-        return true;                                                            \
-    }();                                                                        \
-}                                                                               \
-
-#define REGISTER_MEMCPY_KERNEL(op, backend, type, kernel)                       \
-namespace {                                                                     \
-    static bool reg_##op##_##backend##_##type = []() {                          \
-        dispatcher::Dispatcher::instance().register_memcpy_kernel(              \
             dispatcher::OP::op,                                                 \
             cpp20::DeviceType::backend,                                         \
             cpp20::Dtype::type,                                                 \
