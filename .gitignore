@@ -4,3 +4,4 @@ forge/tools/codegen/cpu/__pycache__
 forge/tools/codegen/xpu/__pycache__
 files.txt
 cloc-2.10.exe
+vcpkg_installed

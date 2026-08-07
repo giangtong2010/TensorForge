@@ -1,5 +1,7 @@
 {
     "env": {
+        "llvmIrPath": "D:/clang+llvm-22.1.8-x86_64-pc-windows-msvc/include",
+
         "llvmPath": "D:/Microsoft Visual Studio/VC/Tools/Llvm/x64",
         "msvcPath": "D:/Microsoft Visual Studio/VC/Tools/MSVC/14.44.35207",
         "winSdkPath": "C:/Program Files (x86)/Windows Kits/10/Include/10.0.26100.0",
@@ -31,6 +33,7 @@
     "configurations": [
         {
             "includePath": [
+                "${llvmIrPath}",
                 "${llvmIncludePath}",
                 "${msvcIncludePath}",
                 "${winSdkIncludePath}",
@@ -58,7 +61,10 @@
                 "${workspaceFolder}/cpp20/device/xpu/core",
                 "${workspaceFolder}/cpp20/device/xpu/xpu_include",
 
-                "${workspaceFolder}/cpp20/intrusive_ptr"
+                "${workspaceFolder}/cpp20/intrusive_ptr",
+
+                "${workspaceFolder}/graph",
+                "${workspaceFolder}/graph/optimization_graph/core"
             ],
             "intelliSenseMode": "windows-clang-x64",
             "compilerPath": "${llvmCompilerPath}",
